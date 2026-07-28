@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "viseme_set": "oculus",
+  "phonemes": {
+    "S":  { "ipa": "/s/",  "label": "S",  "viseme": "viseme_SS", "place": "alveolar",     "cue": "Tongue tip just behind your top teeth. Let the air hiss out in a thin stream." },
+    "Z":  { "ipa": "/z/",  "label": "Z",  "viseme": "viseme_SS", "place": "alveolar",     "cue": "Same as S, but switch your voice on. Feel your throat buzz." },
+    "SH": { "ipa": "/ʃ/",  "label": "SH", "viseme": "viseme_CH", "place": "postalveolar", "cue": "Pull your tongue back a little and round your lips, like saying quiet." },
+    "CH": { "ipa": "/tʃ/", "label": "CH", "viseme": "viseme_CH", "place": "postalveolar", "cue": "Start with your tongue touching, then release into a SH. One quick burst." },
+    "JH": { "ipa": "/dʒ/", "label": "J",  "viseme": "viseme_CH", "place": "postalveolar", "cue": "Like CH, but with your voice on from the start." },
+    "TH": { "ipa": "/θ/",  "label": "TH", "viseme": "viseme_TH", "place": "dental",       "cue": "Tongue tip lightly between your teeth. Blow gently — do not bite." },
+    "DH": { "ipa": "/ð/",  "label": "TH", "viseme": "viseme_TH", "place": "dental",       "cue": "Tongue between your teeth like TH, with your voice switched on." },
+    "R":  { "ipa": "/ɹ/",  "label": "R",  "viseme": "viseme_RR", "place": "alveolar",     "cue": "Curl or bunch your tongue. It must not touch the roof of your mouth." },
+    "L":  { "ipa": "/l/",  "label": "L",  "viseme": "viseme_nn", "place": "alveolar",     "cue": "Tongue tip presses the ridge behind your top teeth. Air escapes at the sides." },
+    "K":  { "ipa": "/k/",  "label": "K",  "viseme": "viseme_kk", "place": "velar",        "cue": "Back of the tongue lifts to the soft palate, then pops apart." },
+    "G":  { "ipa": "/g/",  "label": "G",  "viseme": "viseme_kk", "place": "velar",        "cue": "Same as K, with your voice on. Feel the buzz at the back." },
+    "F":  { "ipa": "/f/",  "label": "F",  "viseme": "viseme_FF", "place": "labiodental",  "cue": "Top teeth rest on your bottom lip. Blow air through the gap." }
+  },
+  "confusions": {
+    "S":  ["SH", "TH", "Z"],
+    "SH": ["S", "CH"],
+    "TH": ["S", "F", "T"],
+    "R":  ["W", "L"],
+    "L":  ["W", "R", "N"],
+    "K":  ["T", "G"],
+    "G":  ["D", "K"],
+    "F":  ["TH", "P"],
+    "CH": ["SH", "T"],
+    "JH": ["CH", "D"],
+    "Z":  ["S", "TH"],
+    "DH": ["D", "TH", "V"]
+  },
+  "look_alike_groups": [
+    { "visually_identical": ["P", "B", "M"], "note": "These look the same from outside the mouth. Only the cross-section view separates them." },
+    { "visually_identical": ["S", "Z"],      "note": "Identical mouth shape. The difference is voicing, not placement." },
+    { "visually_identical": ["K", "G"],      "note": "Identical mouth shape. The difference is voicing, not placement." },
+    { "visually_identical": ["TH", "DH"],    "note": "Identical mouth shape. The difference is voicing, not placement." }
+  ]
+}
