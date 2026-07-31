@@ -5,6 +5,7 @@ import AppLayout from './components/AppLayout';
 // Public pages
 import Landing from './pages/Landing';
 import Login   from './pages/Login';
+import Signup  from './pages/Signup';
 
 // App pages
 import Dashboard    from './pages/Home';
@@ -22,8 +23,9 @@ function AppRouter() {
   return (
     <Routes>
       {/* Public */}
-      <Route path="/"      element={<Landing />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/"       element={<Landing />} />
+      <Route path="/login"  element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
 
       {/* Authenticated app — sidebar layout */}
       <Route
@@ -37,7 +39,7 @@ function AppRouter() {
         <Route index            element={<Dashboard />} />
         <Route path="practice"  element={<Lessons />} />
         <Route path="practice/:targetId" element={<Practice />} />
-        <Route path="lessons"   element={<Lessons />} />
+
         <Route path="progress"  element={<ProgressPage />} />
         <Route path="profile"   element={<Profile />} />
         <Route path="*"         element={<Navigate to="/app" replace />} />

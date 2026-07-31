@@ -44,7 +44,7 @@ export default function TopBar({ onMenuOpen }) {
       </button>
 
       {/* Search */}
-      <div style={{ flex: 1, maxWidth: 420, position: 'relative' }}>
+      <div className="topbar-search" style={{ flex: 1, maxWidth: 420, position: 'relative' }}>
         <svg
           width="16" height="16" viewBox="0 0 24 24" fill="none"
           stroke="var(--ink)" strokeWidth="2" strokeLinecap="round"

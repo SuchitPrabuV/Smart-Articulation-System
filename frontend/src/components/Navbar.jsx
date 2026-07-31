@@ -40,18 +40,7 @@ export default function Navbar() {
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 68, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         {/* Logo */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
-          <div style={{
-            width: 32, height: 32, borderRadius: 8,
-            background: 'linear-gradient(135deg, var(--signal), var(--signal))',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-              <line x1="12" x2="12" y1="19" y2="22"/>
-              <line x1="8" x2="16" y1="22" y2="22"/>
-            </svg>
-          </div>
+          <img src="/logo.png" alt="Eloquate logo" style={{ height: 54, width: 54, objectFit: 'contain', borderRadius: '50%', border: '2.5px solid #0E9F8E' }} />
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.25rem', color: 'var(--text-primary)', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
               ELOQUATE
@@ -96,8 +85,8 @@ export default function Navbar() {
               <Link to="/login" className="btn-ghost" style={{ fontSize: '0.875rem' }}>
                 Sign In
               </Link>
-              <Link to="/login" className="btn-primary" style={{ padding: '8px 18px', fontSize: '0.875rem' }}>
-                Start Practice
+              <Link to="/signup" className="btn-primary" style={{ padding: '8px 18px', fontSize: '0.875rem' }}>
+                Sign Up
               </Link>
             </>
           )}

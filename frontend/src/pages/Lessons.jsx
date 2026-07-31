@@ -6,7 +6,7 @@ export default function Lessons() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
       <div>
         <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: 4 }}>
-          Lesson Library
+          Practice Library
         </h1>
         <p style={{ fontSize: '0.875rem', color: 'var(--ink)' }}>
           Choose a target sound to begin practicing

@@ -5,14 +5,14 @@ import { useAuth } from '../context/AuthContext';
 export default function DashboardStats() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [goalPct] = useState(90); // 18/20 minutes
+  const [goalPct] = useState(0); // 0/20 minutes
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       {/* Top row: Welcome + Daily Goal */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 20, alignItems: 'stretch' }}>
         <WelcomeCard user={user} onStart={() => navigate('/app/practice')} />
-        <GoalRing pct={goalPct} current={18} total={20} />
+        <GoalRing pct={goalPct} current={0} total={20} />
       </div>
 
       {/* Stat chips */}
@@ -173,9 +173,9 @@ function StatRow() {
   const stats = [
     {
       label: 'Avg Score',
-      value: '88',
+      value: '0',
       unit: '/100',
-      change: '+4 this week',
+      change: 'No data yet',
       positive: true,
       color: 'var(--signal)',
       icon: (
@@ -186,9 +186,9 @@ function StatRow() {
     },
     {
       label: 'Current Streak',
-      value: '7',
+      value: '0',
       unit: 'days',
-      change: 'Personal best!',
+      change: 'No data yet',
       positive: true,
       color: 'var(--signal)',
       icon: (
@@ -199,9 +199,9 @@ function StatRow() {
     },
     {
       label: 'Exercises Done',
-      value: '142',
+      value: '0',
       unit: 'total',
-      change: '+12 today',
+      change: 'No data yet',
       positive: true,
       color: 'var(--signal)',
       icon: (
@@ -212,9 +212,9 @@ function StatRow() {
     },
     {
       label: 'Best Sound',
-      value: '/S/',
-      unit: '92%',
-      change: 'Excellent rating',
+      value: '—',
+      unit: '',
+      change: 'No data yet',
       positive: true,
       color: '#0E9F8E',
       icon: (
@@ -226,7 +226,7 @@ function StatRow() {
   ];
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+    <div className="dashboard-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
       {stats.map((s) => (
         <div
           key={s.label}

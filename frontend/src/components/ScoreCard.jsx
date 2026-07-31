@@ -1,11 +1,5 @@
 export default function ScoreCard({ scores }) {
-  const defaultScores = scores || [
-    { exercise: '/S/', score: 89, status: 'Excellent' },
-    { exercise: '/R/', score: 84, status: 'Good' },
-    { exercise: '/TH/', score: 92, status: 'Excellent' },
-    { exercise: '/L/', score: 88, status: 'Good' },
-    { exercise: '/CH/', score: 76, status: 'Fair' },
-  ];
+  const defaultScores = scores || [];
 
   const statusConfig = {
     Excellent: { bg: '#FFFFFF', color: 'var(--signal)' },
@@ -34,6 +28,12 @@ export default function ScoreCard({ scores }) {
         <span className="badge badge-blue">{defaultScores.length} exercises</span>
       </div>
 
+      {defaultScores.length === 0 ? (
+        <div style={{ padding: '32px 20px', textAlign: 'center', color: 'var(--ink)' }}>
+          <p style={{ fontSize: '0.9rem', marginBottom: 8 }}>No recent scores yet</p>
+          <p style={{ fontSize: '0.75rem' }}>Complete some exercises to see them here.</p>
+        </div>
+      ) : (
       <table style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
           <tr style={{ background: 'var(--paper)' }}>
@@ -115,6 +115,7 @@ export default function ScoreCard({ scores }) {
           })}
         </tbody>
       </table>
+      )}
     </div>
   );
 }

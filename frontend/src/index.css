@@ -286,6 +286,48 @@ h1, h2, h3, h4, h5, h6 {
   .sidebar { transform: translateX(-100%); }
   .sidebar.open { transform: translateX(0); }
   .sidebar-content { margin-left: 0; }
+
+  .app-page-content { padding: 20px 16px 32px !important; }
+  .dashboard-split-grid,
+  .dashboard-stat-grid,
+  .progress-chart-grid,
+  .progress-chart-layout,
+  .practice-layout,
+  .profile-form-grid { grid-template-columns: 1fr !important; }
+  .dashboard-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .progress-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .practice-layout { gap: 16px !important; }
+
+  #topbar-menu-btn { display: flex !important; }
+}
+
+@media (max-width: 560px) {
+  .topbar-search { display: none; }
+  .app-page-content { padding: 16px 12px 28px !important; }
+  .progress-stat-grid { gap: 10px !important; }
+  .dashboard-stat-grid { gap: 10px !important; }
+  .btn-primary, .btn-secondary { padding-inline: 16px; }
+
+  .auth-brand-panel { display: none !important; }
+  .auth-form-panel {
+    max-width: none !important;
+    min-height: 100vh;
+    padding: 32px 20px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
+}
+
+@media (max-width: 768px) {
+  .steps-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+  .connector { display: none !important; }
+  .hero-inner { padding: 64px 20px !important; }
+}
+
+@media (max-width: 560px) {
+  .footer-grid { grid-template-columns: 1fr !important; margin-bottom: 40px !important; }
 }
 
 /* ─── Waveform Bars ──────────────────────────────────────────── */
