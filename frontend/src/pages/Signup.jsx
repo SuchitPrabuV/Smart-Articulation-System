@@ -2,24 +2,32 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-export default function Login() {
+export default function Signup() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!form.email || !form.password) {
+    if (!form.name || !form.email || !form.password || !form.confirm) {
       setError('Please fill in all fields.');
+      return;
+    }
+    if (form.password.length < 8) {
+      setError('Password must be at least 8 characters.');
+      return;
+    }
+    if (form.password !== form.confirm) {
+      setError('Passwords do not match.');
       return;
     }
     setLoading(true);
     setError('');
-    await new Promise(r => setTimeout(r, 900));
-    login({ email: form.email });
+    await new Promise(r => setTimeout(r, 1000));
+    login({ name: form.name, email: form.email });
     navigate('/app');
   }
 
@@ -56,16 +64,16 @@ export default function Login() {
         <div>
           <div style={{ width: 42, height: 4, borderRadius: 99, background: 'var(--signal)', marginBottom: 20 }} />
           <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: 'clamp(2rem, 3vw, 2.8rem)', color: 'var(--ink)', lineHeight: 1.15, marginBottom: 20 }}>
-            Speak clearly.<br />Sound confident.
+            Start your journey<br />to clearer speech.
           </h1>
           <p style={{ fontSize: '1rem', color: '#5E7774', maxWidth: 360, lineHeight: 1.65, marginBottom: 36 }}>
-            AI-powered speech therapy that gives you real-time feedback on every word you say.
+            Join thousands of users improving their communication with the power of AI.
           </p>
           {[
-            'Real-time AI pronunciation analysis',
-            'Personalised exercise library',
-            'Visual progress tracking',
-            'Works on all devices',
+            'Free to get started',
+            'Personalised AI feedback',
+            'Track progress over time',
+            'No credit card required',
           ].map(f => (
             <div key={f} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
               <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#D4EEEA', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -76,9 +84,8 @@ export default function Login() {
           ))}
         </div>
 
-        {/* Bottom quote */}
         <p style={{ fontSize: '0.8rem', color: '#78918E', fontStyle: 'italic' }}>
-          "The right word at the right time changes everything."
+          "Communication is the key to unlock any door."
         </p>
       </div>
 
@@ -92,16 +99,17 @@ export default function Login() {
         justifyContent: 'center',
         padding: '48px 52px',
         background: 'white',
+        overflowY: 'auto',
       }}>
         <div style={{ width: '100%', maxWidth: 380 }}>
 
           {/* Header */}
           <div style={{ marginBottom: 32 }}>
             <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.85rem', color: 'var(--ink)', marginBottom: 6 }}>
-              Welcome back
+              Create your account
             </h2>
             <p style={{ fontSize: '0.9rem', color: '#64748b' }}>
-              Sign in to continue your speech journey
+              Free forever. No credit card needed.
             </p>
           </div>
 
@@ -117,7 +125,25 @@ export default function Login() {
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+
+            {/* Full name */}
+            <div>
+              <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--ink)', marginBottom: 6 }}>
+                Full name
+              </label>
+              <input
+                id="signup-name"
+                type="text"
+                placeholder="Jane Smith"
+                value={form.name}
+                onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                required
+                style={inputStyle}
+                onFocus={e => e.target.style.borderColor = '#0E9F8E'}
+                onBlur={e => e.target.style.borderColor = '#e2e8f0'}
+              />
+            </div>
 
             {/* Email */}
             <div>
@@ -125,22 +151,13 @@ export default function Login() {
                 Email address
               </label>
               <input
-                id="login-email"
+                id="signup-email"
                 type="email"
                 placeholder="you@example.com"
                 value={form.email}
                 onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                 required
-                style={{
-                  width: '100%', padding: '11px 14px',
-                  border: '1.5px solid #e2e8f0',
-                  borderRadius: 10, fontSize: '0.9rem',
-                  color: 'var(--ink)', outline: 'none',
-                  fontFamily: 'var(--font-body)',
-                  boxSizing: 'border-box',
-                  transition: 'border-color 0.2s',
-                  background: '#fafafa',
-                }}
+                style={inputStyle}
                 onFocus={e => e.target.style.borderColor = '#0E9F8E'}
                 onBlur={e => e.target.style.borderColor = '#e2e8f0'}
               />
@@ -148,28 +165,18 @@ export default function Login() {
 
             {/* Password */}
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-                <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--ink)' }}>Password</label>
-                <a href="#" style={{ fontSize: '0.82rem', color: '#0E9F8E', textDecoration: 'none', fontWeight: 500 }}>Forgot password?</a>
-              </div>
+              <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--ink)', marginBottom: 6 }}>
+                Password
+              </label>
               <div style={{ position: 'relative' }}>
                 <input
-                  id="login-password"
+                  id="signup-password"
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="••••••••"
+                  placeholder="Min. 8 characters"
                   value={form.password}
                   onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
                   required
-                  style={{
-                    width: '100%', padding: '11px 44px 11px 14px',
-                    border: '1.5px solid #e2e8f0',
-                    borderRadius: 10, fontSize: '0.9rem',
-                    color: 'var(--ink)', outline: 'none',
-                    fontFamily: 'var(--font-body)',
-                    boxSizing: 'border-box',
-                    transition: 'border-color 0.2s',
-                    background: '#fafafa',
-                  }}
+                  style={{ ...inputStyle, paddingRight: 44 }}
                   onFocus={e => e.target.style.borderColor = '#0E9F8E'}
                   onBlur={e => e.target.style.borderColor = '#e2e8f0'}
                 />
@@ -185,11 +192,36 @@ export default function Login() {
                   }
                 </button>
               </div>
+
+            </div>
+
+            {/* Confirm password */}
+            <div>
+              <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--ink)', marginBottom: 6 }}>
+                Confirm password
+              </label>
+              <input
+                id="signup-confirm"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Re-enter your password"
+                value={form.confirm}
+                onChange={e => setForm(f => ({ ...f, confirm: e.target.value }))}
+                required
+                style={{
+                  ...inputStyle,
+                  borderColor: form.confirm && form.confirm !== form.password ? '#fca5a5' : '#e2e8f0',
+                }}
+                onFocus={e => e.target.style.borderColor = '#0E9F8E'}
+                onBlur={e => e.target.style.borderColor = (form.confirm && form.confirm !== form.password) ? '#fca5a5' : '#e2e8f0'}
+              />
+              {form.confirm && form.confirm !== form.password && (
+                <p style={{ fontSize: '0.78rem', color: '#ef4444', marginTop: 4 }}>Passwords don't match</p>
+              )}
             </div>
 
             {/* Submit */}
             <button
-              id="login-submit-btn"
+              id="signup-submit-btn"
               type="submit"
               disabled={loading}
               style={{
@@ -200,24 +232,30 @@ export default function Login() {
                 fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer',
                 fontFamily: 'var(--font-body)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                transition: 'background 0.2s, transform 0.1s',
+                transition: 'background 0.2s',
                 marginTop: 4,
               }}
               onMouseEnter={e => { if (!loading) e.target.style.background = '#0b8a7a'; }}
               onMouseLeave={e => { if (!loading) e.target.style.background = '#0E9F8E'; }}
             >
               {loading
-                ? <><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" style={{ animation: 'spin 1s linear infinite' }}><path d="M21 12a9 9 0 1 1-6.219-8.56" /></svg> Signing in…</>
-                : 'Sign In'
+                ? <><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" style={{ animation: 'spin 1s linear infinite' }}><path d="M21 12a9 9 0 1 1-6.219-8.56" /></svg> Creating account…</>
+                : 'Create Account'
               }
             </button>
+
+            <p style={{ fontSize: '0.75rem', color: '#94a3b8', textAlign: 'center' }}>
+              By creating an account you agree to our{' '}
+              <a href="#" style={{ color: '#0E9F8E', textDecoration: 'none' }}>Terms</a>{' '}and{' '}
+              <a href="#" style={{ color: '#0E9F8E', textDecoration: 'none' }}>Privacy Policy</a>.
+            </p>
           </form>
 
           {/* Footer link */}
-          <p style={{ textAlign: 'center', marginTop: 28, fontSize: '0.875rem', color: '#64748b' }}>
-            Don't have an account?{' '}
-            <Link to="/signup" style={{ color: '#0E9F8E', fontWeight: 600, textDecoration: 'none' }}>
-              Create one free
+          <p style={{ textAlign: 'center', marginTop: 24, fontSize: '0.875rem', color: '#64748b' }}>
+            Already have an account?{' '}
+            <Link to="/login" style={{ color: '#0E9F8E', fontWeight: 600, textDecoration: 'none' }}>
+              Sign in
             </Link>
           </p>
         </div>
@@ -230,3 +268,14 @@ export default function Login() {
     </div>
   );
 }
+
+const inputStyle = {
+  width: '100%', padding: '11px 14px',
+  border: '1.5px solid #e2e8f0',
+  borderRadius: 10, fontSize: '0.9rem',
+  color: '#16233A', outline: 'none',
+  fontFamily: 'Inter, system-ui, sans-serif',
+  boxSizing: 'border-box',
+  transition: 'border-color 0.2s',
+  background: '#fafafa',
+};

@@ -46,7 +46,7 @@ export default function Dashboard() {
       </section>
 
       {/* Scores + Activity */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+      <div className="dashboard-split-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
         <ScoreCard />
         <ActivityTimeline />
       </div>
@@ -55,8 +55,8 @@ export default function Dashboard() {
       <section>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
           <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.05rem', color: 'var(--text-primary)' }}>Recommended Practice</h2>
-          <button className="btn-ghost" style={{ fontSize: '0.82rem' }} onClick={() => navigate('/app/lessons')}>
-            All lessons
+          <button className="btn-ghost" style={{ fontSize: '0.82rem' }} onClick={() => navigate('/app/practice')}>
+            All exercises
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
             </svg>

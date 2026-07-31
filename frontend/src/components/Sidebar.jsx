@@ -25,16 +25,7 @@ const NAV_ITEMS = [
       </svg>
     ),
   },
-  {
-    label: 'Lessons',
-    path: '/app/lessons',
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-      </svg>
-    ),
-  },
+
   {
     label: 'Progress',
     path: '/app/progress',
@@ -90,19 +81,9 @@ export default function Sidebar({ mobileOpen, onClose }) {
         <div style={{ padding: '20px 16px 12px', borderBottom: '1px solid var(--paper)', flexShrink: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{
-                width: 32, height: 32, borderRadius: 8,
-                background: 'linear-gradient(135deg, var(--signal), var(--signal))',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round">
-                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                  <line x1="12" x2="12" y1="19" y2="22"/>
-                </svg>
-              </div>
+              <img src="/logo.png" alt="Eloquate logo" style={{ height: 54, width: 54, objectFit: 'contain', borderRadius: '50%', border: '2.5px solid #0E9F8E' }} />
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-primary)', letterSpacing: '-0.02em', lineHeight: 1.2 }}>
+                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '1.1rem', color: 'var(--text-primary)', letterSpacing: '0.01em', lineHeight: 1.2 }}>
                   ELOQUATE
                 </span>
                 <span style={{ fontSize: '0.55rem', color: 'var(--ink)', fontWeight: 500, letterSpacing: '0.02em' }}>

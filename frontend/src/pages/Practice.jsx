@@ -42,7 +42,7 @@ export default function Practice() {
       <div style={{ textAlign: 'center', padding: '60px 24px' }}>
         <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: 12 }}>Sound not found</h2>
         <p style={{ color: 'var(--ink)', marginBottom: 24 }}>The requested exercise doesn't exist.</p>
-        <Link to="/app/lessons" className="btn-primary">Browse Lessons</Link>
+        <Link to="/app/practice" className="btn-primary">Browse Practice</Link>
       </div>
     );
   }
@@ -78,14 +78,14 @@ export default function Practice() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       {/* Breadcrumb */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', color: 'var(--ink)' }}>
-        <button onClick={() => navigate('/app/lessons')} className="btn-ghost" style={{ padding: '4px 8px', fontSize: '0.85rem' }}>
-          Lessons
+        <button onClick={() => navigate('/app/practice')} className="btn-ghost" style={{ padding: '4px 8px', fontSize: '0.85rem' }}>
+          Practice
         </button>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="m9 18 6-6-6-6"/></svg>
         <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Practising {target.phoneme}</span>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 24, alignItems: 'start' }}>
+      <div className="practice-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 24, alignItems: 'start' }}>
 
         {/* ── LEFT: Main practice panel ── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>

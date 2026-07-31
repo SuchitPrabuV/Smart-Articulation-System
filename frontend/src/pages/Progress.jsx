@@ -7,15 +7,15 @@ import {
 
 const HEATMAP_DATA = Array.from({ length: 28 }, (_, i) => ({
   day: i,
-  value: Math.random() > 0.3 ? Math.floor(Math.random() * 4) + 1 : 0,
+  value: 0,
 }));
 
 const RADAR_DATA = [
-  { metric: 'Accuracy',   value: 88 },
-  { metric: 'Clarity',    value: 82 },
-  { metric: 'Fluency',    value: 75 },
-  { metric: 'Confidence', value: 70 },
-  { metric: 'Pace',       value: 78 },
+  { metric: 'Accuracy',   value: 0 },
+  { metric: 'Clarity',    value: 0 },
+  { metric: 'Fluency',    value: 0 },
+  { metric: 'Confidence', value: 0 },
+  { metric: 'Pace',       value: 0 },
 ];
 
 export default function Progress() {
@@ -44,10 +44,10 @@ export default function Progress() {
         }, {})
       ).map(([, v]) => ({ day: v.day, score: Math.round(v.score / v.count) }))
     : [
-        { day: 'Mon', score: 72 }, { day: 'Tue', score: 78 },
-        { day: 'Wed', score: 83 }, { day: 'Thu', score: 88 },
-        { day: 'Fri', score: 85 }, { day: 'Sat', score: 91 },
-        { day: 'Sun', score: 88 },
+        { day: 'Mon', score: 0 }, { day: 'Tue', score: 0 },
+        { day: 'Wed', score: 0 }, { day: 'Thu', score: 0 },
+        { day: 'Fri', score: 0 }, { day: 'Sat', score: 0 },
+        { day: 'Sun', score: 0 },
       ];
 
   return (
@@ -58,20 +58,20 @@ export default function Progress() {
       </div>
 
       {/* Stat chips */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 16 }}>
+      <div className="progress-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 16 }}>
         {[
           { label: 'Average Score', value: avgScore || '—', unit: '/100', color: 'var(--signal)' },
           { label: 'Best Sound',    value: bestTarget    ? bestTarget[0].toUpperCase()   : '—', unit: '', color: 'var(--signal)' },
           { label: 'Weakest Sound', value: weakestTarget ? weakestTarget[0].toUpperCase() : '—', unit: '', color: 'var(--signal)' },
           { label: 'Exercises',     value: attempts.length, unit: 'done', color: '#0E9F8E' },
-          { label: 'Streak',        value: 7, unit: 'days', color: 'var(--signal)' },
+          { label: 'Streak',        value: 0, unit: 'days', color: 'var(--signal)' },
         ].map((s) => (
           <StatChip key={s.label} {...s} />
         ))}
       </div>
 
       {/* Charts row */}
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 20 }}>
+      <div className="progress-chart-layout" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 20 }}>
         {/* Weekly area chart */}
         <div style={{ background: 'white', border: '1px solid var(--paper)', borderRadius: 16, padding: '20px', boxShadow: 'var(--card-shadow)' }}>
           <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)', marginBottom: 4 }}>Monthly Progress</h3>

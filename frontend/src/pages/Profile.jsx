@@ -8,7 +8,6 @@ export default function Profile() {
     email:        user.email,
     dailyGoal:    '20',
     language:     'en-US',
-    theme:        'light',
     notifications: true,
   });
   const [saved, setSaved] = useState(false);
@@ -58,8 +57,8 @@ export default function Profile() {
           <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: 4 }}>{user.name}</div>
           <div style={{ fontSize: '0.875rem', color: 'var(--ink)', marginBottom: 8 }}>{user.email}</div>
           <div style={{ display: 'flex', gap: 8 }}>
-            <span className="badge badge-blue">7-day streak</span>
-            <span className="badge badge-success">88 avg score</span>
+            <span className="badge badge-blue">0-day streak</span>
+            <span className="badge badge-success">0 avg score</span>
           </div>
         </div>
       </div>
@@ -69,7 +68,7 @@ export default function Profile() {
         <div style={{ background: 'white', border: '1px solid var(--paper)', borderRadius: 16, padding: '28px', boxShadow: 'var(--card-shadow)', display: 'flex', flexDirection: 'column', gap: 0 }}>
           <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)', marginBottom: 24 }}>Personal Information</h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+          <div className="profile-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
             <Field label="Full Name" id="profile-name">
               <input id="profile-name" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} style={inputStyle} onFocus={onFocus} onBlur={onBlur}/>
             </Field>
@@ -78,7 +77,7 @@ export default function Profile() {
             </Field>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+          <div className="profile-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
             <Field label="Daily Goal (minutes)" id="profile-goal">
               <input id="profile-goal" type="number" min="5" max="60" value={form.dailyGoal} onChange={e => setForm(f => ({ ...f, dailyGoal: e.target.value }))} style={inputStyle} onFocus={onFocus} onBlur={onBlur}/>
             </Field>
@@ -91,14 +90,7 @@ export default function Profile() {
             </Field>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 24 }}>
-            <Field label="Theme" id="profile-theme">
-              <select id="profile-theme" value={form.theme} onChange={e => setForm(f => ({ ...f, theme: e.target.value }))} style={{ ...inputStyle, cursor: 'pointer' }}>
-                <option value="light">Light</option>
-                <option value="dark">Dark (coming soon)</option>
-                <option value="system">System default</option>
-              </select>
-            </Field>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 24 }}>
             <Field label="Notifications" id="profile-notif">
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, height: 42 }}>
                 <Toggle checked={form.notifications} onChange={v => setForm(f => ({ ...f, notifications: v }))} id="profile-notif-toggle"/>

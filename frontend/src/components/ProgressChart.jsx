@@ -7,30 +7,30 @@ import {
 } from 'recharts';
 
 const weeklyData = [
-  { day: 'Mon', score: 72 },
-  { day: 'Tue', score: 78 },
-  { day: 'Wed', score: 75 },
-  { day: 'Thu', score: 83 },
-  { day: 'Fri', score: 88 },
-  { day: 'Sat', score: 85 },
-  { day: 'Sun', score: 91 },
+  { day: 'Mon', score: 0 },
+  { day: 'Tue', score: 0 },
+  { day: 'Wed', score: 0 },
+  { day: 'Thu', score: 0 },
+  { day: 'Fri', score: 0 },
+  { day: 'Sat', score: 0 },
+  { day: 'Sun', score: 0 },
 ];
 
 const accuracyData = [
-  { sound: '/S/', accuracy: 92 },
-  { sound: '/R/', accuracy: 84 },
-  { sound: '/TH/', accuracy: 76 },
-  { sound: '/L/', accuracy: 88 },
-  { sound: '/CH/', accuracy: 80 },
-  { sound: '/SH/', accuracy: 86 },
+  { sound: '/S/', accuracy: 0 },
+  { sound: '/R/', accuracy: 0 },
+  { sound: '/TH/', accuracy: 0 },
+  { sound: '/L/', accuracy: 0 },
+  { sound: '/CH/', accuracy: 0 },
+  { sound: '/SH/', accuracy: 0 },
 ];
 
 const radarData = [
-  { metric: 'Accuracy',   value: 88 },
-  { metric: 'Clarity',    value: 82 },
-  { metric: 'Fluency',    value: 75 },
-  { metric: 'Confidence', value: 70 },
-  { metric: 'Pace',       value: 78 },
+  { metric: 'Accuracy',   value: 0 },
+  { metric: 'Clarity',    value: 0 },
+  { metric: 'Fluency',    value: 0 },
+  { metric: 'Confidence', value: 0 },
+  { metric: 'Pace',       value: 0 },
 ];
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -55,7 +55,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 export default function ProgressChart() {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+    <div className="progress-chart-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
       {/* Weekly Line Chart */}
       <ChartCard title="Weekly Progress" subtitle="Score over the past 7 days">
         <ResponsiveContainer width="100%" height={200}>
@@ -123,9 +123,9 @@ export default function ProgressChart() {
       {/* Mini trend cards */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {[
-          { label: 'Best session this week', value: '91', sub: 'Sunday · /S/ exercise', color: 'var(--signal)' },
-          { label: 'Most improved sound', value: '/R/', sub: '+12pts from last week', color: 'var(--signal)' },
-          { label: 'Weakest area', value: '/TH/', sub: 'Needs more practice', color: 'var(--signal)' },
+          { label: 'Best session this week', value: '—', sub: 'No data yet', color: 'var(--signal)' },
+          { label: 'Most improved sound', value: '—', sub: 'No data yet', color: 'var(--signal)' },
+          { label: 'Weakest area', value: '—', sub: 'No data yet', color: 'var(--signal)' },
         ].map((item) => (
           <div key={item.label} style={{
             background: 'white',

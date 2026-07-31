@@ -85,9 +85,9 @@ function HowItWorks() {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0, position: 'relative' }}>
+        <div className="steps-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0, position: 'relative' }}>
           {/* Connector lines */}
-          <div style={{
+          <div className="connector" style={{
             position: 'absolute',
             top: 44,
             left: '16.5%',
