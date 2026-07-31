@@ -1,7 +1,7 @@
 const BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 // Flip to false on Day 2 once Sukirthan's endpoint is up.
-export const USE_MOCK = true;
+export const USE_MOCK = false;
 
 function mockScore({ target_phoneme, target_text, expected }) {
   const roll = () => 35 + Math.floor(Math.random() * 65);

@@ -1,15 +1,15 @@
 export default function PracticeCard({ exercise, difficulty, estimatedTime, onStart }) {
   const diffColor = {
-    Easy:   { bg: '#FFFFFF', color: 'var(--signal)' },
-    Medium: { bg: '#FFFFFF', color: '#0E9F8E' },
-    Hard:   { bg: '#FFFFFF', color: 'var(--signal)' },
-  }[difficulty] || { bg: '#FBF9F4', color: '#16233A' };
+    Easy:   { bg: 'var(--paper)', color: 'var(--signal)' },
+    Medium: { bg: 'var(--paper)', color: '#0E9F8E' },
+    Hard:   { bg: 'var(--paper)', color: 'var(--signal)' },
+  }[difficulty] || { bg: 'var(--line)', color: 'var(--ink)' };
 
   return (
     <div
       style={{
-        background: 'white',
-        border: '1px solid var(--paper)',
+        background: 'var(--card)',
+        border: '1px solid var(--line)',
         borderRadius: 14,
         padding: '18px 20px',
         display: 'flex',

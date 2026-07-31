@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { ALL_VISEMES, NEUTRAL, rocketboxMorphTargetForViseme } from './visemeMap';
@@ -48,7 +48,7 @@ export default function Avatar({ playRef, currentArpa, onFrame }) {
     }
   });
 
-  return <primitive object={scene} position={[0, -1.55, 0]} scale={1.1} />;
+  return <primitive object={scene} position={[0, -1.60, 0]} scale={1.1} />;
 }
 
 useGLTF.preload('/models/Business_Female_02_Facial.glb');

@@ -1,21 +1,60 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { getAttempts } from '../data/session';
+
+function computeStreak(attempts) {
+  if (!attempts || attempts.length === 0) return 0;
+  const dates = Array.from(new Set(attempts.map(a => new Date(a.at).toDateString()))).map(d => new Date(d));
+  dates.sort((a, b) => b - a);
+
+  let currentStreak = 0;
+  let today = new Date();
+  today.setHours(0,0,0,0);
+
+  const diffTime = today - dates[0];
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  if (diffDays > 1) return 0;
+
+  let current = dates[0];
+  currentStreak = 1;
+
+  for (let i = 1; i < dates.length; i++) {
+    const prev = dates[i];
+    const diff = (current - prev) / (1000 * 60 * 60 * 24);
+    if (diff === 1) {
+      currentStreak++;
+      current = prev;
+    } else if (diff > 1) {
+      break;
+    }
+  }
+  return currentStreak;
+}
 
 export default function Profile() {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
   const [form, setForm] = useState({
-    name:         user.name,
-    email:        user.email,
-    dailyGoal:    '20',
-    language:     'en-US',
-    notifications: true,
+    name: user.name || '',
+    email: user.email || '',
+    dailyGoal: user.dailyGoal || '20',
+    language: user.language || 'en-US',
+    notifications: user.notifications !== false,
   });
   const [saved, setSaved] = useState(false);
 
+  const attempts = useMemo(() => getAttempts(), []);
+  const avgScore = useMemo(() => {
+    if (!attempts.length) return 0;
+    return Math.round(attempts.reduce((acc, a) => acc + a.score, 0) / attempts.length);
+  }, [attempts]);
+
+  const streak = useMemo(() => computeStreak(attempts), [attempts]);
+
   function handleSave(e) {
     e.preventDefault();
+    updateUser(form);
     setSaved(true);
-    setTimeout(() => setSaved(false), 2500);
+    setTimeout(() => setSaved(false), 3000);
   }
 
   return (
@@ -26,7 +65,7 @@ export default function Profile() {
       </div>
 
       {/* Avatar section */}
-      <div style={{ background: 'white', border: '1px solid var(--paper)', borderRadius: 16, padding: '28px', boxShadow: 'var(--card-shadow)', display: 'flex', alignItems: 'center', gap: 24 }}>
+      <div style={{ background: 'var(--card)', border: '1px solid var(--line)', borderRadius: 16, padding: '28px', boxShadow: 'var(--card-shadow)', display: 'flex', alignItems: 'center', gap: 24 }}>
         <div style={{ position: 'relative' }}>
           <div style={{
             width: 80, height: 80, borderRadius: '50%',
@@ -39,12 +78,12 @@ export default function Profile() {
           <button style={{
             position: 'absolute', bottom: 0, right: 0,
             width: 26, height: 26, borderRadius: '50%',
-            background: 'white', border: '2px solid var(--paper)',
+            background: 'var(--card)', border: '2px solid var(--line)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'pointer', transition: 'background 0.15s',
           }}
             onMouseEnter={e => e.currentTarget.style.background = 'var(--paper)'}
-            onMouseLeave={e => e.currentTarget.style.background = 'white'}
+            onMouseLeave={e => e.currentTarget.style.background = 'var(--card)'}
             aria-label="Change avatar"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" strokeWidth="2.5" strokeLinecap="round">
@@ -57,15 +96,15 @@ export default function Profile() {
           <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: 4 }}>{user.name}</div>
           <div style={{ fontSize: '0.875rem', color: 'var(--ink)', marginBottom: 8 }}>{user.email}</div>
           <div style={{ display: 'flex', gap: 8 }}>
-            <span className="badge badge-blue">0-day streak</span>
-            <span className="badge badge-success">0 avg score</span>
+            <span className="badge badge-blue">{streak} {streak === 1 ? 'day' : 'days'} streak</span>
+            <span className="badge badge-success">{avgScore} avg score</span>
           </div>
         </div>
       </div>
 
       {/* Form */}
       <form onSubmit={handleSave}>
-        <div style={{ background: 'white', border: '1px solid var(--paper)', borderRadius: 16, padding: '28px', boxShadow: 'var(--card-shadow)', display: 'flex', flexDirection: 'column', gap: 0 }}>
+        <div style={{ background: 'var(--card)', border: '1px solid var(--line)', borderRadius: 16, padding: '28px', boxShadow: 'var(--card-shadow)', display: 'flex', flexDirection: 'column', gap: 0 }}>
           <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)', marginBottom: 24 }}>Personal Information</h2>
 
           <div className="profile-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
@@ -99,7 +138,7 @@ export default function Profile() {
             </Field>
           </div>
 
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center', paddingTop: 4, borderTop: '1px solid var(--paper)' }}>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center', paddingTop: 4, borderTop: '1px solid var(--line)' }}>
             <button type="submit" className="btn-primary" style={{ padding: '10px 24px' }} id="profile-save-btn">
               {saved ? (
                 <>
@@ -137,7 +176,7 @@ function Toggle({ checked, onChange, id }) {
       aria-checked={checked}
       style={{
         width: 44, height: 24, borderRadius: 999,
-        background: checked ? 'var(--blue-primary)' : '#FBF9F4',
+        background: checked ? 'var(--blue-primary)' : 'var(--line)',
         border: 'none', cursor: 'pointer',
         position: 'relative',
         transition: 'background 0.2s',
@@ -156,12 +195,12 @@ function Toggle({ checked, onChange, id }) {
 
 const inputStyle = {
   width: '100%', padding: '10px 14px',
-  border: '1.5px solid var(--paper)',
+  border: '1.5px solid var(--line)',
   borderRadius: 10, fontSize: '0.875rem',
   color: 'var(--text-primary)', outline: 'none',
   fontFamily: 'var(--font-body)',
-  background: 'white', boxSizing: 'border-box',
+  background: 'var(--card)', boxSizing: 'border-box',
   transition: 'border-color 0.2s',
 };
 const onFocus = e => e.target.style.borderColor = 'var(--blue-primary)';
-const onBlur  = e => e.target.style.borderColor = 'var(--paper)';
+const onBlur  = e => e.target.style.borderColor = 'var(--line)';

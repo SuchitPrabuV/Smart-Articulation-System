@@ -13,8 +13,8 @@ export default function LessonCard({ target, info }) {
     >
       <div
         style={{
-          background: 'white',
-          border: '1px solid var(--paper)',
+          background: 'var(--card)',
+          border: '1px solid var(--line)',
           borderRadius: 16,
           padding: '22px 22px 20px',
           cursor: 'pointer',
@@ -30,7 +30,7 @@ export default function LessonCard({ target, info }) {
           e.currentTarget.style.boxShadow = '0 8px 28px rgba(14,159,142,.12)';
         }}
         onMouseLeave={e => {
-          e.currentTarget.style.borderColor = 'var(--paper)';
+          e.currentTarget.style.borderColor = 'var(--line)';
           e.currentTarget.style.transform = 'none';
           e.currentTarget.style.boxShadow = 'var(--card-shadow)';
         }}

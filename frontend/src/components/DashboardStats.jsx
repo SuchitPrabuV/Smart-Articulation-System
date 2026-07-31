@@ -1,22 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-export default function DashboardStats() {
+export default function DashboardStats({ attemptsCount, avgScore, streak, bestSound, practiceSeconds, totalMinutes, goalPct }) {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [goalPct] = useState(0); // 0/20 minutes
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       {/* Top row: Welcome + Daily Goal */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 20, alignItems: 'stretch' }}>
+      <div className="dashboard-split-grid" style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 20, alignItems: 'stretch' }}>
         <WelcomeCard user={user} onStart={() => navigate('/app/practice')} />
-        <GoalRing pct={goalPct} current={0} total={20} />
+        <GoalRing pct={goalPct} currentSeconds={practiceSeconds} total={totalMinutes} />
       </div>
 
       {/* Stat chips */}
-      <StatRow />
+      <StatRow attemptsCount={attemptsCount} avgScore={avgScore} streak={streak} bestSound={bestSound} />
     </div>
   );
 }
@@ -86,7 +85,7 @@ function WelcomeCard({ user, onStart }) {
       </div>
 
       {/* Waveform decoration */}
-      <div style={{ display: 'flex', gap: 4, alignItems: 'center', position: 'relative', zIndex: 1 }}>
+      <div style={{ display: 'flex', gap: 4, alignItems: 'center', position: 'relative', zIndex: 1 }} className="topbar-search">
         {[18, 32, 48, 38, 55, 42, 60, 45, 38, 28, 42, 35].map((h, i) => (
           <div key={i} style={{
             width: 4, height: h,
@@ -100,7 +99,7 @@ function WelcomeCard({ user, onStart }) {
   );
 }
 
-function GoalRing({ pct, current, total }) {
+function GoalRing({ pct, currentSeconds, total }) {
   const r = 54;
   const circ = 2 * Math.PI * r;
   const offset = circ - (pct / 100) * circ;
@@ -112,10 +111,16 @@ function GoalRing({ pct, current, total }) {
     }
   }, [offset]);
 
+  const formatTime = (secs) => {
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    return `${m}m ${s}s`;
+  };
+
   return (
     <div style={{
-      background: 'white',
-      border: '1px solid var(--paper)',
+      background: 'var(--card)',
+      border: '1px solid var(--line)',
       borderRadius: 16,
       padding: '20px 24px',
       display: 'flex',
@@ -157,25 +162,25 @@ function GoalRing({ pct, current, total }) {
           display: 'flex', flexDirection: 'column',
           alignItems: 'center', justifyContent: 'center',
         }}>
-          <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '1.6rem', color: 'var(--blue-primary)', lineHeight: 1 }}>{pct}%</span>
+          <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '1.6rem', color: 'var(--text-primary)', lineHeight: 1 }}>{pct}%</span>
           <span style={{ fontSize: '0.72rem', color: 'var(--ink)', marginTop: 2, fontWeight: 500 }}>complete</span>
         </div>
       </div>
       <div style={{ fontSize: '0.82rem', color: 'var(--ink)', textAlign: 'center', lineHeight: 1.4 }}>
         Practice Time<br />
-        <strong style={{ color: 'var(--text-primary)' }}>{current} / {total} min</strong>
+        <strong style={{ color: 'var(--text-primary)' }}>{formatTime(currentSeconds)} / {total} min</strong>
       </div>
     </div>
   );
 }
 
-function StatRow() {
+function StatRow({ attemptsCount, avgScore, streak, bestSound }) {
   const stats = [
     {
       label: 'Avg Score',
-      value: '0',
+      value: avgScore || '0',
       unit: '/100',
-      change: 'No data yet',
+      change: attemptsCount > 0 ? 'Based on practice' : 'No data yet',
       positive: true,
       color: 'var(--signal)',
       icon: (
@@ -186,9 +191,9 @@ function StatRow() {
     },
     {
       label: 'Current Streak',
-      value: '0',
-      unit: 'days',
-      change: 'No data yet',
+      value: streak || '0',
+      unit: streak === 1 ? 'day' : 'days',
+      change: streak > 0 ? 'Keep it up!' : 'No data yet',
       positive: true,
       color: 'var(--signal)',
       icon: (
@@ -199,9 +204,9 @@ function StatRow() {
     },
     {
       label: 'Exercises Done',
-      value: '0',
+      value: attemptsCount || '0',
       unit: 'total',
-      change: 'No data yet',
+      change: attemptsCount > 0 ? 'Active learner' : 'No data yet',
       positive: true,
       color: 'var(--signal)',
       icon: (
@@ -212,9 +217,9 @@ function StatRow() {
     },
     {
       label: 'Best Sound',
-      value: '—',
+      value: bestSound || '—',
       unit: '',
-      change: 'No data yet',
+      change: bestSound !== '—' ? 'Highest accuracy' : 'No data yet',
       positive: true,
       color: '#0E9F8E',
       icon: (
@@ -231,8 +236,8 @@ function StatRow() {
         <div
           key={s.label}
           style={{
-            background: 'white',
-            border: '1px solid var(--paper)',
+            background: 'var(--card)',
+            border: '1px solid var(--line)',
             borderRadius: 14,
             padding: '18px 20px',
             boxShadow: 'var(--card-shadow)',
@@ -253,7 +258,7 @@ function StatRow() {
             <span style={{ fontSize: '0.8rem', color: 'var(--ink)', fontWeight: 500 }}>{s.unit}</span>
           </div>
           <div style={{ fontSize: '0.78rem', color: s.positive ? 'var(--signal)' : 'var(--signal)', fontWeight: 500 }}>
-            {s.positive ? '↑ ' : '↓ '}{s.change}
+            {s.change}
           </div>
         </div>
       ))}

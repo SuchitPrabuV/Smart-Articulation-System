@@ -37,8 +37,8 @@ const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
   return (
     <div style={{
-      background: 'white',
-      border: '1px solid var(--paper)',
+      background: 'var(--card)',
+      border: '1px solid var(--line)',
       borderRadius: 10,
       padding: '10px 14px',
       boxShadow: '0 4px 16px rgba(0,0,0,.08)',
@@ -128,8 +128,8 @@ export default function ProgressChart() {
           { label: 'Weakest area', value: '—', sub: 'No data yet', color: 'var(--signal)' },
         ].map((item) => (
           <div key={item.label} style={{
-            background: 'white',
-            border: '1px solid var(--paper)',
+            background: 'var(--card)',
+            border: '1px solid var(--line)',
             borderRadius: 12,
             padding: '14px 16px',
             display: 'flex',
@@ -155,8 +155,8 @@ export default function ProgressChart() {
 function ChartCard({ title, subtitle, children }) {
   return (
     <div style={{
-      background: 'white',
-      border: '1px solid var(--paper)',
+      background: 'var(--card)',
+      border: '1px solid var(--line)',
       borderRadius: 16,
       padding: '20px 20px 12px',
       boxShadow: 'var(--card-shadow)',

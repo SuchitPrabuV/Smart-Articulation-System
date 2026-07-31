@@ -14,6 +14,7 @@
   --signal:  #0E9F8E;
   --alert:   #0E9F8E;
   --wrong:   #0E9F8E;
+  --text-primary: var(--ink);
 
   /* Tints derived from --signal */
   --signal-hover:   #0E9F8E;
@@ -68,6 +69,19 @@
   --r: 10px;
 }
 
+body.dark {
+  /* Dark palette */
+  --paper:   #0B0F19; /* Deep slate background */
+  --card:    #161F30; /* Lighter slate card */
+  --ink:     #E5E7EB; /* Light text */
+  --muted:   #9CA3AF; /* Muted gray text */
+  --line:    #1F2937; /* Slate border lines */
+  --text-primary: var(--ink);
+  --signal-light: #1E293B; /* Dark active highlight */
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+  --card-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.5);
+}
+
 /* ─── Base ───────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 html, body, #root { height: 100%; }
@@ -79,6 +93,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Theme transition properties */
+.card, .card-elevated, header, aside, main, input, select, button, div, p, span, a, h1, h2, h3, h4, h5, h6 {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -2,8 +2,8 @@ export default function FeedbackCard({ result, loading, error, onRetry }) {
   if (loading) {
     return (
       <div style={{
-        background: 'white',
-        border: '1px solid var(--paper)',
+        background: 'var(--card)',
+        border: '1px solid var(--line)',
         borderRadius: 16,
         padding: 24,
         boxShadow: 'var(--card-shadow)',
@@ -27,8 +27,8 @@ export default function FeedbackCard({ result, loading, error, onRetry }) {
   if (error) {
     return (
       <div style={{
-        background: 'white',
-        border: '1px solid #FFFFFF',
+        background: 'var(--card)',
+        border: '1px solid var(--line)',
         borderRadius: 16,
         padding: 24,
         boxShadow: 'var(--card-shadow)',
@@ -76,14 +76,14 @@ export default function FeedbackCard({ result, loading, error, onRetry }) {
   const { overall_score, verdict, phonemes = [], tip, expected = [], heard = [] } = result;
 
   const verdictConfig = {
-    correct:   { label: 'Excellent',  bg: '#FFFFFF', color: 'var(--signal)', border: '#FFFFFF' },
-    close:     { label: 'Almost',     bg: '#FFFFFF', color: '#0E9F8E', border: '#FFFFFF' },
-    incorrect: { label: 'Keep Going', bg: '#FFFFFF', color: 'var(--signal)', border: 'var(--signal)' },
+    correct:   { label: 'Excellent',  bg: 'var(--paper)', color: 'var(--signal)', border: 'var(--line)' },
+    close:     { label: 'Almost',     bg: 'var(--paper)', color: '#0E9F8E', border: 'var(--line)' },
+    incorrect: { label: 'Keep Going', bg: 'var(--paper)', color: 'var(--signal)', border: 'var(--line)' },
   };
   const cfg = verdictConfig[verdict] || verdictConfig.close;
 
   return (
-    <div style={{ background: 'white', border: '1px solid var(--paper)', borderRadius: 16, padding: 24, boxShadow: 'var(--card-shadow)' }}>
+    <div style={{ background: 'var(--card)', border: '1px solid var(--line)', borderRadius: 16, padding: 24, boxShadow: 'var(--card-shadow)' }}>
       {/* Score header */}
       <div style={{
         background: cfg.bg,

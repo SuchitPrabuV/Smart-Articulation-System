@@ -5,13 +5,13 @@ export default function ActivityTimeline({ items }) {
 
   return (
     <div style={{
-      background: 'white',
-      border: '1px solid var(--paper)',
+      background: 'var(--card)',
+      border: '1px solid var(--line)',
       borderRadius: 16,
       overflow: 'hidden',
       boxShadow: 'var(--card-shadow)',
     }}>
-      <div style={{ padding: '18px 20px 14px', borderBottom: '1px solid var(--paper)' }}>
+      <div style={{ padding: '18px 20px 14px', borderBottom: '1px solid var(--line)' }}>
         <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)', marginBottom: 2 }}>Recent Activity</h3>
         <p style={{ fontSize: '0.78rem', color: 'var(--ink)' }}>Your latest sessions and achievements</p>
       </div>
@@ -30,7 +30,7 @@ export default function ActivityTimeline({ items }) {
                 display: 'flex',
                 gap: 14,
                 padding: '12px 0',
-                borderBottom: i < activities.length - 1 ? '1px solid var(--paper)' : 'none',
+                borderBottom: i < activities.length - 1 ? '1px solid var(--line)' : 'none',
                 position: 'relative',
               }}
             >
@@ -48,7 +48,7 @@ export default function ActivityTimeline({ items }) {
                 </div>
                 {i < activities.length - 1 && (
                   <div style={{
-                    width: 1, flex: 1, background: 'var(--paper)',
+                    width: 1, flex: 1, background: 'var(--line)',
                     margin: '4px 0', minHeight: 16,
                   }} />
                 )}

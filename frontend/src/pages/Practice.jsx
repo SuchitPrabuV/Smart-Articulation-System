@@ -3,10 +3,11 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getTarget, getItems, phonemeInfo } from '../data/loadContent';
 import { scoreAttempt } from '../api/client';
 import { useRecorder } from '../hooks/useRecorder';
-import { pushAttempt } from '../data/session';
+import { pushAttempt, addPracticeTime } from '../data/session';
 import Waveform from '../components/Waveform';
 import Recorder from '../components/Recorder';
 import FeedbackCard from '../components/FeedbackCard';
+import Articulation from '../components/Articulation';
 
 export default function Practice() {
   const { targetId } = useParams();
@@ -36,6 +37,14 @@ export default function Practice() {
     }
     return () => clearInterval(timerRef.current);
   }, [state]);
+
+  // Track active practice time
+  useEffect(() => {
+    const interval = setInterval(() => {
+      addPracticeTime(1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   if (!target) {
     return (
@@ -91,7 +100,7 @@ export default function Practice() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
 
           {/* Header card */}
-          <div style={{ background: 'white', border: '1px solid var(--paper)', borderRadius: 16, padding: '24px 28px', boxShadow: 'var(--card-shadow)' }}>
+          <div style={{ background: 'var(--card)', border: '1px solid var(--line)', borderRadius: 16, padding: '24px 28px', boxShadow: 'var(--card-shadow)' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
               <div>
                 <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '2rem', color: 'var(--text-primary)', letterSpacing: '-0.03em', marginBottom: 4 }}>
@@ -178,10 +187,30 @@ export default function Practice() {
             </div>
           </div>
 
+          {/* Articulation Guide Card */}
+          <div style={{
+            background: 'var(--card)',
+            border: '1px solid var(--line)',
+            borderRadius: 16,
+            padding: '24px 28px',
+            boxShadow: 'var(--card-shadow)',
+          }}>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: 16 }}>
+              Articulation Guide
+            </h2>
+            <Articulation
+              phoneme={target.phoneme}
+              text={item?.text}
+              level={level}
+              expected={item?.expected}
+              playing={state === 'recording'}
+            />
+          </div>
+
           {/* Recording card — focal point */}
           <div style={{
-            background: 'white',
-            border: '1px solid var(--paper)',
+            background: 'var(--card)',
+            border: '1px solid var(--line)',
             borderRadius: 20,
             padding: '36px 28px',
             boxShadow: 'var(--card-shadow-lg)',
@@ -249,7 +278,7 @@ export default function Practice() {
           )}
 
           {/* Session info */}
-          <div style={{ background: 'white', border: '1px solid var(--paper)', borderRadius: 14, padding: '16px 18px', boxShadow: 'var(--card-shadow)' }}>
+          <div style={{ background: 'var(--card)', border: '1px solid var(--line)', borderRadius: 14, padding: '16px 18px', boxShadow: 'var(--card-shadow)' }}>
             <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.875rem', color: 'var(--text-primary)', marginBottom: 14 }}>Session Info</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {[

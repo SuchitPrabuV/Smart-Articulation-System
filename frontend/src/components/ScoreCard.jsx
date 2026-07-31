@@ -10,15 +10,15 @@ export default function ScoreCard({ scores }) {
 
   return (
     <div style={{
-      background: 'white',
-      border: '1px solid var(--paper)',
+      background: 'var(--card)',
+      border: '1px solid var(--line)',
       borderRadius: 16,
       overflow: 'hidden',
       boxShadow: 'var(--card-shadow)',
     }}>
       <div style={{
         padding: '18px 20px 14px',
-        borderBottom: '1px solid var(--paper)',
+        borderBottom: '1px solid var(--line)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <div>
@@ -62,7 +62,7 @@ export default function ScoreCard({ scores }) {
               <tr
                 key={i}
                 style={{
-                  borderBottom: i < defaultScores.length - 1 ? '1px solid var(--paper)' : 'none',
+                  borderBottom: i < defaultScores.length - 1 ? '1px solid var(--line)' : 'none',
                   transition: 'background 0.15s',
                   cursor: 'default',
                 }}

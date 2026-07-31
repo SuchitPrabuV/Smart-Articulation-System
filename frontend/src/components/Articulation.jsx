@@ -27,12 +27,11 @@ class Boundary extends Component {
   }
 }
 
-export default function Articulation({ phoneme, text, level = 'sound', expected }) {
+export default function Articulation({ phoneme, text, level = 'sound', expected, playing }) {
   const playRef = useRef({ playing: false, startedAt: 0, timeline: [], speed: 1 });
   const timeoutRef = useRef(null);
-  const [playing, setPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [currentArpa, setCurrentArpa] = useState('sil');
-  const [speed, setSpeed] = useState(1);
   const safePhoneme = String(phoneme || '').toUpperCase();
   const info = phonemeInfo(safePhoneme);
   const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -52,23 +51,42 @@ export default function Articulation({ phoneme, text, level = 'sound', expected 
     };
   }, []);
 
+  const prevPlayingRef = useRef(false);
+
   const play = useCallback(() => {
-    if (playing) return;
+    if (playRef.current.playing) return;
     if (timeoutRef.current) {
       window.clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
-    playRef.current = { playing: true, startedAt: performance.now(), timeline, speed };
-    setPlaying(true);
+    playRef.current = { playing: true, startedAt: performance.now(), timeline, speed: 1 };
+    setIsPlaying(true);
     setCurrentArpa(safePhoneme);
     const duration = prefersReducedMotion ? 100 : totalDuration(timeline) + 100;
     timeoutRef.current = window.setTimeout(() => {
       playRef.current.playing = false;
-      setPlaying(false);
+      setIsPlaying(false);
       setCurrentArpa('sil');
       timeoutRef.current = null;
     }, duration);
-  }, [playing, timeline, speed, safePhoneme, prefersReducedMotion]);
+  }, [timeline, safePhoneme, prefersReducedMotion]);
+
+  useEffect(() => {
+    if (playing !== prevPlayingRef.current) {
+      prevPlayingRef.current = playing;
+      if (playing) {
+        play();
+      } else {
+        if (timeoutRef.current) {
+          window.clearTimeout(timeoutRef.current);
+          timeoutRef.current = null;
+        }
+        playRef.current.playing = false;
+        setIsPlaying(false);
+        setCurrentArpa('sil');
+      }
+    }
+  }, [playing, play]);
 
   if (USE_CLIPS) return <ClipFallback phoneme={safePhoneme} />;
 
@@ -76,7 +94,7 @@ export default function Articulation({ phoneme, text, level = 'sound', expected 
     <div>
       <div className="aspect-video rounded-[10px] overflow-hidden bg-paper border border-line">
         <Boundary phoneme={safePhoneme}>
-          <Canvas camera={{ position: [0, 0.05, 0.62], fov: 22 }}>
+          <Canvas camera={{ position: [0, 0.06, 0.68], fov: 24 }}>
             <ambientLight intensity={1.1} />
             <directionalLight position={[1, 2, 2]} intensity={1.4} />
             <Suspense fallback={null}>
@@ -89,24 +107,16 @@ export default function Articulation({ phoneme, text, level = 'sound', expected 
       <div className="mt-3 flex items-center gap-3 flex-wrap">
         <button
           onClick={play}
-          disabled={playing}
+          disabled={isPlaying || playing}
           className="px-4 h-10 rounded-[10px] text-sm font-medium border border-line disabled:opacity-40"
+          style={{ background: 'var(--card)', color: 'var(--text-primary)', cursor: 'pointer', transition: 'background 0.2s' }}
         >
-          {playing ? 'Playing…' : `Show ${info.label || safePhoneme || 'sound'}`}
+          {isPlaying || playing ? 'Playing…' : `Show ${info.label || safePhoneme || 'sound'}`}
         </button>
-        <label className="text-xs text-muted mono flex items-center gap-2">
-          <span>Speed</span>
-          <select
-            value={speed}
-            onChange={(event) => setSpeed(Number(event.target.value))}
-            className="rounded border border-line bg-[var(--paper)] px-2 py-1"
-          >
-            <option value={1}>1×</option>
-            <option value={0.5}>0.5×</option>
-          </select>
-        </label>
-        <span className="mono text-xs text-muted">{info.ipa} · {info.place}</span>
-        {currentArpa === safePhoneme && <span className="mono text-xs" style={{ color: 'var(--signal)' }}>▸ {safePhoneme}</span>}
+        <span className="mono text-xs text-muted" style={{ marginLeft: 'auto' }}>
+          {info.ipa} · {info.place}
+        </span>
+        {(isPlaying || playing) && <span className="mono text-xs" style={{ color: 'var(--signal)' }}>▸ {currentArpa}</span>}
       </div>
     </div>
   );

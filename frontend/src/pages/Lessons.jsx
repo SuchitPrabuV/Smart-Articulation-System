@@ -25,13 +25,13 @@ export default function Lessons() {
             placeholder="Search sounds…"
             style={{
               width: '100%', padding: '9px 14px 9px 38px',
-              background: 'white', border: '1px solid var(--paper)',
+              background: 'var(--card)', border: '1px solid var(--line)',
               borderRadius: 10, fontSize: '0.875rem',
               color: 'var(--text-primary)', outline: 'none',
               fontFamily: 'var(--font-body)', boxSizing: 'border-box',
             }}
             onFocus={e => e.target.style.borderColor = 'var(--blue-primary)'}
-            onBlur={e => e.target.style.borderColor = 'var(--paper)'}
+            onBlur={e => e.target.style.borderColor = 'var(--line)'}
           />
         </div>
         <span style={{ fontSize: '0.85rem', color: 'var(--ink)', fontWeight: 500, whiteSpace: 'nowrap' }}>
