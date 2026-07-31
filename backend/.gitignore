@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+models/
+calib_clips/
+.pytest_cache/
