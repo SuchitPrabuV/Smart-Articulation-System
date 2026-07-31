@@ -83,7 +83,7 @@ export default function Sidebar({ mobileOpen, onClose }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <img src="/logo.png" alt="Eloquate logo" style={{ height: 54, width: 54, objectFit: 'contain', borderRadius: '50%', border: '2.5px solid #0E9F8E' }} />
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-primary)', letterSpacing: '-0.02em', lineHeight: 1.2 }}>
+                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '1.1rem', color: 'var(--text-primary)', letterSpacing: '0.01em', lineHeight: 1.2 }}>
                   ELOQUATE
                 </span>
                 <span style={{ fontSize: '0.55rem', color: 'var(--ink)', fontWeight: 500, letterSpacing: '0.02em' }}>

@@ -68,6 +68,7 @@ export default function Hero() {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
+              fontStyle: 'italic',
             }}>
               {'Communicate Confidently.'}
             </span>
