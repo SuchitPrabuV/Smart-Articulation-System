@@ -2,18 +2,11 @@ fastapi==0.115.0
 uvicorn[standard]==0.30.6
 python-multipart==0.0.9
 
-# Day 2 (real engine) — install only when REAL_ENGINE=1 is wanted.
-# Use Python 3.10–3.12 for this pin: transformers 4.44.2 -> tokenizers 0.19 has
-# no prebuilt wheel for Python 3.13 (needs a Rust toolchain).
-# torch
-# torchaudio
-# transformers==4.44.2
-# soundfile
-# librosa
-# numpy
-# g2p-en            # only used by expected.py's sentence fallback (lookup covers current content)
-#
-# NOT required: phonemizer / espeak-ng. This model's HF phoneme tokenizer wants
-# them, but engine.py loads the feature-extractor + vocab.json directly and skips
-# the tokenizer, so the real engine runs without the espeak-ng system binary.
-# huggingface_hub ships with transformers (used by engine.py to read vocab.json).
+# Day 2 (real engine)
+torch
+torchaudio
+transformers
+soundfile
+librosa
+numpy
+g2p-en
