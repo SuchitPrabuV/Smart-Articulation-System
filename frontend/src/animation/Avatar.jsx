@@ -33,7 +33,7 @@ export default function Avatar({ playRef, currentArpa, onFrame }) {
       return;
     }
 
-    const t = (performance.now() - state.startedAt) * (state.speed || 1);
+    const t = (performance.now() - state.startedAt) * (state.mapScale || state.speed || 1);
     const { frame, next, progress } = frameAt(state.timeline, t);
     if (!frame) return;
     if (onFrame) onFrame(frame.arpa || 'sil');
@@ -48,7 +48,7 @@ export default function Avatar({ playRef, currentArpa, onFrame }) {
     }
   });
 
-  return <primitive object={scene} position={[0, -1.60, 0]} scale={1.1} />;
+  return <primitive object={scene} position={[0, -0.685, 0]} rotation={[0, -Math.PI / 2, 0]} scale={0.011} />;
 }
 
 useGLTF.preload('/models/Business_Female_02_Facial.glb');
