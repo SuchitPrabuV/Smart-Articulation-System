@@ -83,7 +83,7 @@ export default function Recorder({ state, onStart, onStop, onReplay, disabled, t
 
       {/* Secondary controls */}
       <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-        <button
+        {/* <button
           onClick={onReplay}
           disabled={!onReplay || state === 'idle' || state === 'recording'}
           className="btn-secondary"
@@ -94,7 +94,7 @@ export default function Recorder({ state, onStart, onStop, onReplay, disabled, t
             <polygon points="5 3 19 12 5 21 5 3"/>
           </svg>
           Replay
-        </button>
+        </button> */}
         <span style={{ fontSize: '0.8rem', color: 'var(--ink)', fontWeight: 500 }}>
           {isRecording ? 'Tap to stop' : 'Tap mic to record'}
         </span>

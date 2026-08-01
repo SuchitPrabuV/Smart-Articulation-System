@@ -8,6 +8,11 @@ import Waveform from '../components/Waveform';
 import Recorder from '../components/Recorder';
 import FeedbackCard from '../components/FeedbackCard';
 import Articulation from '../components/Articulation';
+import Celebration from '../components/Celebration';
+import { imageForItem } from '../data/itemImages';
+
+// Score at or above this earns a confetti + applause celebration.
+const CELEBRATE_THRESHOLD = 75
 
 export default function Practice() {
   const { targetId } = useParams();
@@ -21,10 +26,13 @@ export default function Practice() {
   const [error, setError] = useState(null);
   const [timer, setTimer] = useState(0);
   const timerRef = useRef(null);
+  const [celebrate, setCelebrate] = useState(null); // { key, score } | null
+  const celebrateTimeout = useRef(null);
 
   const { state, level: micLevel, error: micError, start, stop } = useRecorder();
   const items = useMemo(() => getItems(targetId, level), [targetId, level]);
   const item = items[idx];
+  const itemImage = imageForItem(item);
   const info = target ? phonemeInfo(target.phoneme) : null;
 
   // Timer during recording
@@ -44,6 +52,11 @@ export default function Practice() {
       addPracticeTime(1);
     }, 1000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Clear any pending celebration timer on unmount
+  useEffect(() => () => {
+    if (celebrateTimeout.current) clearTimeout(celebrateTimeout.current);
   }, []);
 
   if (!target) {
@@ -74,6 +87,11 @@ export default function Practice() {
       });
       setResult(res);
       pushAttempt({ targetId, level, itemId: item.id, score: res.overall_score, at: Date.now() });
+      if (res.overall_score >= CELEBRATE_THRESHOLD) {
+        if (celebrateTimeout.current) clearTimeout(celebrateTimeout.current);
+        setCelebrate({ key: Date.now(), score: res.overall_score });
+        celebrateTimeout.current = setTimeout(() => setCelebrate(null), 3200);
+      }
     } catch (e) {
       setError(e.message || 'Could not score that attempt.');
     } finally {
@@ -85,6 +103,8 @@ export default function Practice() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      {celebrate && <Celebration key={celebrate.key} score={celebrate.score} />}
+
       {/* Breadcrumb */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', color: 'var(--ink)' }}>
         <button onClick={() => navigate('/app/practice')} className="btn-ghost" style={{ padding: '4px 8px', fontSize: '0.85rem' }}>
@@ -154,6 +174,19 @@ export default function Practice() {
                 <p style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--signal)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
                   {level === 'sound' ? 'Target Sound' : level === 'word' ? 'Target Word' : 'Target Sentence'}
                 </p>
+                {itemImage && (
+                  <div
+                    aria-hidden
+                    style={{
+                      fontSize: level === 'sentence' ? '3rem' : '4.5rem',
+                      lineHeight: 1,
+                      marginBottom: 10,
+                      userSelect: 'none',
+                    }}
+                  >
+                    {itemImage}
+                  </div>
+                )}
                 <p style={{
                   fontFamily: 'var(--font-heading)',
                   fontWeight: 700,

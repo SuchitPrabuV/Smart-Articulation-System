@@ -419,3 +419,17 @@ em, i {
 .badge-warning { background: #FFFFFF; color: #0E9F8E; }
 .badge-blue    { background: var(--signal-light); color: var(--signal); }
 .badge-gray    { background: #FBF9F4; color: #16233A; }
+
+/* ─── Celebration (high-score reward) ────────────────────────── */
+@keyframes confetti-fall {
+  0%   { transform: translateY(-24px) rotate(0deg);   opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg); opacity: 0.9; }
+}
+@keyframes celebrate-pop {
+  0%   { transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+  55%  { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  @keyframes confetti-fall { 0%, 100% { opacity: 0; } }
+}

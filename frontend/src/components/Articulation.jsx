@@ -33,20 +33,38 @@ function utteranceFor(level, text, phoneme) {
   return text || phoneme || '';
 }
 
-// Best-quality female English voices, most preferred first. Names vary by
-// OS/browser, so we match by substring and fall back gracefully.
+// Indian-English female voices, most preferred first (Neerja on Edge's natural
+// set, Heera on Windows; the AWS/other names help on any browser that exposes
+// them). We target these before anything else.
+const INDIAN_FEMALE = ['neerja', 'heera', 'kajal', 'priya', 'aditi', 'raveena', 'ananya', 'swara', 'isha'];
+
+// Best-quality female English voices for the fallback path, most preferred
+// first. Names vary by OS/browser, so we match by substring and fall back.
 const PREFERRED_FEMALE = [
   'aria', 'jenny', 'michelle', 'emma', 'ava', 'nova',          // Edge "Natural" / online
   'google us english', 'google uk english female',            // Chrome
   'samantha', 'karen', 'serena', 'moira', 'tessa', 'fiona',    // macOS / iOS
-  'zira', 'hazel', 'susan', 'linda', 'heera',                 // Windows / other local
+  'zira', 'hazel', 'susan', 'linda',                          // Windows / other local
 ];
-const FEMALE_HINTS = ['female', 'woman', ...PREFERRED_FEMALE, 'joanna', 'salli', 'kendra', 'victoria', 'sonia', 'natasha'];
-const MALE_HINTS = ['david', 'mark', 'ravi', 'guy', 'eric', 'christopher', 'roger', 'daniel', 'george', 'james', 'male', 'alex', 'fred', 'tom', 'william', 'richard'];
+const FEMALE_HINTS = ['female', 'woman', ...INDIAN_FEMALE, ...PREFERRED_FEMALE, 'joanna', 'salli', 'kendra', 'victoria', 'sonia', 'natasha'];
+const MALE_HINTS = ['david', 'mark', 'ravi', 'prabhat', 'hemant', 'madhur', 'guy', 'eric', 'christopher', 'roger', 'daniel', 'george', 'james', 'male', 'alex', 'fred', 'tom', 'william', 'richard'];
 
-// Pick the nicest available female English voice.
+// Pick an Indian-English female voice, falling back to the best female English
+// voice available, then to any non-male voice.
 function pickFemaleVoice(voices) {
   if (!voices || !voices.length) return null;
+  const isMale = (v) => MALE_HINTS.some((h) => v.name.toLowerCase().includes(h));
+
+  // 1. Prefer a named Indian-English female voice.
+  for (const needle of INDIAN_FEMALE) {
+    const v = voices.find((x) => x.name.toLowerCase().includes(needle));
+    if (v) return v;
+  }
+  // 2. Any en-IN voice that isn't obviously male.
+  const indianFemale = voices.find((v) => /en[-_]in/i.test(v.lang) && !isMale(v));
+  if (indianFemale) return indianFemale;
+
+  // 3. Otherwise the nicest general female English voice.
   const en = voices.filter((v) => /^en/i.test(v.lang));
   const pool = en.length ? en : voices;
   for (const needle of PREFERRED_FEMALE) {
@@ -55,11 +73,11 @@ function pickFemaleVoice(voices) {
   }
   const byHint = pool.find((v) => {
     const n = v.name.toLowerCase();
-    return FEMALE_HINTS.some((h) => n.includes(h)) && !MALE_HINTS.some((h) => n.includes(h));
+    return FEMALE_HINTS.some((h) => n.includes(h)) && !isMale(v);
   });
   if (byHint) return byHint;
-  const notMale = pool.find((v) => !MALE_HINTS.some((h) => v.name.toLowerCase().includes(h)));
-  return notMale || pool.find((v) => /en[-_]us/i.test(v.lang)) || pool[0];
+  const notMale = pool.find((v) => !isMale(v));
+  return notMale || pool.find((v) => /en[-_](in|us)/i.test(v.lang)) || pool[0];
 }
 
 // Rough spoken-duration estimate in ms, calibrated against measured TTS output:
@@ -189,10 +207,10 @@ export default function Articulation({ phoneme, text, level = 'sound', expected,
     const doSpeak = () => {
       if (token !== playTokenRef.current) return;
       const u = new SpeechSynthesisUtterance(toSay);
-      u.lang = 'en-US';
       u.rate = Math.max(0.1, Math.min(2, rate || 1));
       const v = pickFemaleVoice(synth.getVoices());
       if (v) u.voice = v;
+      u.lang = (v && v.lang) || 'en-IN';
       let started = false;
       u.onstart = () => { started = true; begin(); };   // mouth starts with the audio
       u.onend = () => { if (token === playTokenRef.current) stopPlayback(); }; // and stops with it
