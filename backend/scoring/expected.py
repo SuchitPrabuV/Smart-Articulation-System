@@ -30,6 +30,33 @@ _LOOKUP = {
     "rain is coming.": ["R","EY","N","IH","Z","K","AH","M","IH","NG"],
     "i think it is thick.": ["AY","TH","IH","NG","K","IH","T","IH","Z","TH","IH","K"],
     "thank you for the bath.": ["TH","AE","NG","K","Y","UW","F","AO","R","DH","AH","B","AE","TH"],
+    # T
+    "toy": ["T", "OY"],
+    "turtle": ["T", "ER", "T", "AH", "L"],
+    "cat": ["K", "AE", "T"],
+    "water": ["W", "AO", "T", "ER"],
+    "the cat sees a turtle.": ["DH","AH","K","AE","T","S","IY","Z","AH","T","ER","T","AH","L"],
+    "take the toy.": ["T","EY","K","DH","AH","T","OY"],
+    # D
+    "dog": ["D", "AO", "G"],
+    "duck": ["D", "AH", "K"],
+    "bed": ["B", "EH", "D"],
+    "ladder": ["L", "AE", "D", "ER"],
+    "the dog and duck play.": ["DH","AH","D","AO","G","AH","N","D","D","AH","K","P","L","EY"],
+    "dad is in bed.": ["D","AE","D","IH","Z","IH","N","B","EH","D"],
+    # K
+    "key": ["K", "IY"],
+    "cake": ["K", "EY", "K"],
+    "book": ["B", "UH", "K"],
+    "monkey": ["M", "AH", "NG", "K", "IY"],
+    "i like the cake.": ["AY","L","AY","K","DH","AH","K","EY","K"],
+    "the monkey has a key.": ["DH","AH","M","AH","NG","K","IY","HH","AE","Z","AH","K","IY"],
+    # G
+    "goat": ["G", "OW", "T"],
+    "girl": ["G", "ER", "L"],
+    "wagon": ["W", "AE", "G", "AH", "N"],
+    "the goat is big.": ["DH","AH","G","OW","T","IH","Z","B","IH","G"],
+    "the girl has a dog.": ["DH","AH","G","ER","L","HH","AE","Z","AH","D","AO","G"],
 }
 
 _G2P = None

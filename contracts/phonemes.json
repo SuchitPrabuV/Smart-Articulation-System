@@ -13,7 +13,9 @@
     "L":  { "ipa": "/l/",  "label": "L",  "viseme": "viseme_nn", "place": "alveolar",     "cue": "Tongue tip presses the ridge behind your top teeth. Air escapes at the sides." },
     "K":  { "ipa": "/k/",  "label": "K",  "viseme": "viseme_kk", "place": "velar",        "cue": "Back of the tongue lifts to the soft palate, then pops apart." },
     "G":  { "ipa": "/g/",  "label": "G",  "viseme": "viseme_kk", "place": "velar",        "cue": "Same as K, with your voice on. Feel the buzz at the back." },
-    "F":  { "ipa": "/f/",  "label": "F",  "viseme": "viseme_FF", "place": "labiodental",  "cue": "Top teeth rest on your bottom lip. Blow air through the gap." }
+    "F":  { "ipa": "/f/",  "label": "F",  "viseme": "viseme_FF", "place": "labiodental",  "cue": "Top teeth rest on your bottom lip. Blow air through the gap." },
+    "T":  { "ipa": "/t/",  "label": "T",  "viseme": "viseme_DD", "place": "alveolar",     "cue": "Tongue tip taps the ridge behind your top teeth, then pops off. Quick and crisp." },
+    "D":  { "ipa": "/d/",  "label": "D",  "viseme": "viseme_DD", "place": "alveolar",     "cue": "Same as T, but switch your voice on. Feel your throat buzz as the tip taps." }
   },
   "confusions": {
     "S":  ["SH", "TH", "Z"],
@@ -27,7 +29,9 @@
     "CH": ["SH", "T"],
     "JH": ["CH", "D"],
     "Z":  ["S", "TH"],
-    "DH": ["D", "TH", "V"]
+    "DH": ["D", "TH", "V"],
+    "T":  ["D", "K"],
+    "D":  ["T", "G", "B"]
   },
   "look_alike_groups": [
     { "visually_identical": ["P", "B", "M"], "note": "These look the same from outside the mouth. Only the cross-section view separates them." },

@@ -240,6 +240,48 @@ export default function Practice() {
             />
           </div>
 
+          {/* Recording card has been moved to the right column */}
+        </div>
+
+        {/* ── RIGHT: Feedback panel ── */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <FeedbackCard
+            result={result}
+            loading={loading}
+            error={error}
+            onRetry={() => { setResult(null); setError(null); }}
+          />
+
+          {/* Next exercise button */}
+          {result && (
+            <button
+              onClick={nextItem}
+              className="btn-primary"
+              style={{ justifyContent: 'center', padding: '12px' }}
+              id="practice-next-exercise"
+            >
+              Next Exercise
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          )}
+
+          {/* Session info */}
+          <div style={{ background: 'var(--card)', border: '1px solid var(--line)', borderRadius: 14, padding: '16px 18px', boxShadow: 'var(--card-shadow)' }}>
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.875rem', color: 'var(--text-primary)', marginBottom: 14 }}>Session Info</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {[
+                { label: 'Target sound', value: target.phoneme },
+                { label: 'Level', value: level.charAt(0).toUpperCase() + level.slice(1) },
+                { label: 'Exercise', value: `${idx + 1} of ${items.length}` },
+              ].map(({ label, value }) => (
+                <div key={label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.83rem' }}>
+                  <span style={{ color: 'var(--ink)', fontWeight: 500 }}>{label}</span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontFamily: 'monospace' }}>{value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Recording card — focal point */}
           <div style={{
             background: 'var(--card)',
@@ -285,46 +327,6 @@ export default function Practice() {
                 {micError}
               </p>
             )}
-          </div>
-        </div>
-
-        {/* ── RIGHT: Feedback panel ── */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <FeedbackCard
-            result={result}
-            loading={loading}
-            error={error}
-            onRetry={() => { setResult(null); setError(null); }}
-          />
-
-          {/* Next exercise button */}
-          {result && (
-            <button
-              onClick={nextItem}
-              className="btn-primary"
-              style={{ justifyContent: 'center', padding: '12px' }}
-              id="practice-next-exercise"
-            >
-              Next Exercise
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="m9 18 6-6-6-6"/></svg>
-            </button>
-          )}
-
-          {/* Session info */}
-          <div style={{ background: 'var(--card)', border: '1px solid var(--line)', borderRadius: 14, padding: '16px 18px', boxShadow: 'var(--card-shadow)' }}>
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.875rem', color: 'var(--text-primary)', marginBottom: 14 }}>Session Info</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {[
-                { label: 'Target sound', value: target.phoneme },
-                { label: 'Level', value: level.charAt(0).toUpperCase() + level.slice(1) },
-                { label: 'Exercise', value: `${idx + 1} of ${items.length}` },
-              ].map(({ label, value }) => (
-                <div key={label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.83rem' }}>
-                  <span style={{ color: 'var(--ink)', fontWeight: 500 }}>{label}</span>
-                  <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontFamily: 'monospace' }}>{value}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 

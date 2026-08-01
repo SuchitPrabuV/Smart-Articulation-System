@@ -1,6 +1,7 @@
 import { Component, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Avatar from '../animation/Avatar';
+import SagittalView from './SagittalView';
 import ClipFallback from '../animation/clipFallback';
 import { buildTimeline, totalDuration } from '../animation/timeline';
 import { phonemeInfo } from '../data/loadContent';
@@ -307,6 +308,13 @@ export default function Articulation({ phoneme, text, level = 'sound', expected,
           </Canvas>
         </Boundary>
       </div>
+
+      {/* Inside-the-mouth cross-section — synced to the same timeline. S only for now. */}
+      {safePhoneme === 'S' && (
+        <div className="mt-3 rounded-[10px] overflow-hidden bg-paper border border-line" style={{ padding: '8px 12px 6px' }}>
+          <SagittalView playRef={playRef} currentArpa={currentArpa} />
+        </div>
+      )}
 
       <div className="mt-3 flex items-center gap-3 flex-wrap">
         <button

@@ -57,6 +57,82 @@
           { "id": "th-sen-2", "text": "Thank you for the bath.", "expected": ["TH","AE","NG","K","Y","UW","F","AO","R","DH","AH","B","AE","TH"] }
         ]
       }
+    },
+    {
+      "id": "t",
+      "phoneme": "T",
+      "levels": {
+        "sound": [
+          { "id": "t-snd-1", "text": "T", "expected": ["T"], "reps": 5, "prompt": "Tap out the T sound: t-t-t. Tongue tip taps behind your top teeth." }
+        ],
+        "word": [
+          { "id": "t-wrd-1", "text": "toy",    "expected": ["T","OY"],             "position": "initial" },
+          { "id": "t-wrd-2", "text": "turtle", "expected": ["T","ER","T","AH","L"], "position": "initial" },
+          { "id": "t-wrd-3", "text": "cat",    "expected": ["K","AE","T"],         "position": "final"   },
+          { "id": "t-wrd-4", "text": "water",  "expected": ["W","AO","T","ER"],    "position": "medial"  }
+        ],
+        "sentence": [
+          { "id": "t-sen-1", "text": "The cat sees a turtle.", "expected": ["DH","AH","K","AE","T","S","IY","Z","AH","T","ER","T","AH","L"] },
+          { "id": "t-sen-2", "text": "Take the toy.",          "expected": ["T","EY","K","DH","AH","T","OY"] }
+        ]
+      }
+    },
+    {
+      "id": "d",
+      "phoneme": "D",
+      "levels": {
+        "sound": [
+          { "id": "d-snd-1", "text": "D", "expected": ["D"], "reps": 5, "prompt": "Tap out the D sound: d-d-d. Switch your voice on and feel the buzz." }
+        ],
+        "word": [
+          { "id": "d-wrd-1", "text": "dog",    "expected": ["D","AO","G"],         "position": "initial" },
+          { "id": "d-wrd-2", "text": "duck",   "expected": ["D","AH","K"],         "position": "initial" },
+          { "id": "d-wrd-3", "text": "bed",    "expected": ["B","EH","D"],         "position": "final"   },
+          { "id": "d-wrd-4", "text": "ladder", "expected": ["L","AE","D","ER"],    "position": "medial"  }
+        ],
+        "sentence": [
+          { "id": "d-sen-1", "text": "The dog and duck play.", "expected": ["DH","AH","D","AO","G","AH","N","D","D","AH","K","P","L","EY"] },
+          { "id": "d-sen-2", "text": "Dad is in bed.",         "expected": ["D","AE","D","IH","Z","IH","N","B","EH","D"] }
+        ]
+      }
+    },
+    {
+      "id": "k",
+      "phoneme": "K",
+      "levels": {
+        "sound": [
+          { "id": "k-snd-1", "text": "K", "expected": ["K"], "reps": 5, "prompt": "Make the K sound at the back: k-k-k. Lift the back of your tongue." }
+        ],
+        "word": [
+          { "id": "k-wrd-1", "text": "key",    "expected": ["K","IY"],             "position": "initial" },
+          { "id": "k-wrd-2", "text": "cake",   "expected": ["K","EY","K"],         "position": "initial" },
+          { "id": "k-wrd-3", "text": "book",   "expected": ["B","UH","K"],         "position": "final"   },
+          { "id": "k-wrd-4", "text": "monkey", "expected": ["M","AH","NG","K","IY"], "position": "medial" }
+        ],
+        "sentence": [
+          { "id": "k-sen-1", "text": "I like the cake.",        "expected": ["AY","L","AY","K","DH","AH","K","EY","K"] },
+          { "id": "k-sen-2", "text": "The monkey has a key.",   "expected": ["DH","AH","M","AH","NG","K","IY","HH","AE","Z","AH","K","IY"] }
+        ]
+      }
+    },
+    {
+      "id": "g",
+      "phoneme": "G",
+      "levels": {
+        "sound": [
+          { "id": "g-snd-1", "text": "G", "expected": ["G"], "reps": 5, "prompt": "Make the G sound at the back: g-g-g. Voice on, feel the buzz." }
+        ],
+        "word": [
+          { "id": "g-wrd-1", "text": "goat",  "expected": ["G","OW","T"],          "position": "initial" },
+          { "id": "g-wrd-2", "text": "girl",  "expected": ["G","ER","L"],          "position": "initial" },
+          { "id": "g-wrd-3", "text": "dog",   "expected": ["D","AO","G"],          "position": "final"   },
+          { "id": "g-wrd-4", "text": "wagon", "expected": ["W","AE","G","AH","N"], "position": "medial"  }
+        ],
+        "sentence": [
+          { "id": "g-sen-1", "text": "The goat is big.",       "expected": ["DH","AH","G","OW","T","IH","Z","B","IH","G"] },
+          { "id": "g-sen-2", "text": "The girl has a dog.",    "expected": ["DH","AH","G","ER","L","HH","AE","Z","AH","D","AO","G"] }
+        ]
+      }
     }
   ]
 }
