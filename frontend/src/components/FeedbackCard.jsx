@@ -1,3 +1,12 @@
+// Map a 0–100 score to 1–5 stars (kid-friendly, always at least one star).
+function starsFor(score) {
+  if (score >= 90) return 5;
+  if (score >= 75) return 4;
+  if (score >= 60) return 3;
+  if (score >= 40) return 2;
+  return 1;
+}
+
 export default function FeedbackCard({ result, loading, error, onRetry }) {
   if (loading) {
     return (
@@ -92,9 +101,13 @@ export default function FeedbackCard({ result, loading, error, onRetry }) {
         padding: '14px 18px',
         display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20,
       }}>
-        <div style={{ textAlign: 'center', minWidth: 56 }}>
-          <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '2rem', color: cfg.color, lineHeight: 1 }}>{overall_score}</div>
-          <div style={{ fontSize: '0.7rem', color: cfg.color, fontWeight: 600, opacity: 0.7 }}>/100</div>
+        <div style={{ textAlign: 'center', minWidth: 90 }}>
+          <div style={{ fontSize: '1.5rem', lineHeight: 1, letterSpacing: '2px', whiteSpace: 'nowrap' }} aria-label={`${starsFor(overall_score)} out of 5 stars`}>
+            {[1, 2, 3, 4, 5].map((i) => (
+              <span key={i} style={{ color: i <= starsFor(overall_score) ? '#FFC93C' : '#E4DAD1' }}>★</span>
+            ))}
+          </div>
+          <div style={{ fontSize: '0.7rem', color: cfg.color, fontWeight: 600, opacity: 0.75, marginTop: 4 }}>{starsFor(overall_score)}/5 stars</div>
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1rem', color: cfg.color, marginBottom: 2 }}>{cfg.label}</div>

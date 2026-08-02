@@ -57,6 +57,26 @@ _LOOKUP = {
     "wagon": ["W", "AE", "G", "AH", "N"],
     "the goat is big.": ["DH","AH","G","OW","T","IH","Z","B","IH","G"],
     "the girl has a dog.": ["DH","AH","G","ER","L","HH","AE","Z","AH","D","AO","G"],
+    # M
+    "mouse": ["M", "AW", "S"],
+    "moon": ["M", "UW", "N"],
+    "mom": ["M", "AA", "M"],
+    "camel": ["K", "AE", "M", "AH", "L"],
+    "the mouse is small.": ["DH","AH","M","AW","S","IH","Z","S","M","AO","L"],
+    "look at the moon.": ["L","UH","K","AE","T","DH","AH","M","UW","N"],
+    # F
+    "fish": ["F", "IH", "SH"],
+    "foot": ["F", "UH", "T"],
+    "leaf": ["L", "IY", "F"],
+    "coffee": ["K", "AA", "F", "IY"],
+    "i see a fish.": ["AY","S","IY","AH","F","IH","SH"],
+    "my foot hurts.": ["M","AY","F","UH","T","HH","ER","T","S"],
+    # L
+    "lion": ["L", "AY", "AH", "N"],
+    "ball": ["B", "AO", "L"],
+    "balloon": ["B", "AH", "L", "UW", "N"],
+    "the lion roars.": ["DH","AH","L","AY","AH","N","R","AO","R","Z"],
+    "throw the ball.": ["TH","R","OW","DH","AH","B","AO","L"],
 }
 
 _G2P = None

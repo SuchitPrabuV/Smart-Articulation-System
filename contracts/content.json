@@ -133,6 +133,63 @@
           { "id": "g-sen-2", "text": "The girl has a dog.",    "expected": ["DH","AH","G","ER","L","HH","AE","Z","AH","D","AO","G"] }
         ]
       }
+    },
+    {
+      "id": "m",
+      "phoneme": "M",
+      "levels": {
+        "sound": [
+          { "id": "m-snd-1", "text": "M", "expected": ["M"], "reps": 5, "prompt": "Lips together. Hum with your voice on. Air goes out your nose." }
+        ],
+        "word": [
+          { "id": "m-wrd-1", "text": "mouse",  "expected": ["M","AW","S"],         "position": "initial" },
+          { "id": "m-wrd-2", "text": "moon",   "expected": ["M","UW","N"],         "position": "initial" },
+          { "id": "m-wrd-3", "text": "mom",    "expected": ["M","AA","M"],         "position": "final"   },
+          { "id": "m-wrd-4", "text": "camel",  "expected": ["K","AE","M","AH","L"], "position": "medial" }
+        ],
+        "sentence": [
+          { "id": "m-sen-1", "text": "The mouse is small.", "expected": ["DH","AH","M","AW","S","IH","Z","S","M","AO","L"] },
+          { "id": "m-sen-2", "text": "Look at the moon.",   "expected": ["L","UH","K","AE","T","DH","AH","M","UW","N"] }
+        ]
+      }
+    },
+    {
+      "id": "f",
+      "phoneme": "F",
+      "levels": {
+        "sound": [
+          { "id": "f-snd-1", "text": "F", "expected": ["F"], "reps": 5, "prompt": "Top teeth gently touch your bottom lip. Blow air steadily." }
+        ],
+        "word": [
+          { "id": "f-wrd-1", "text": "fish",   "expected": ["F","IH","SH"],        "position": "initial" },
+          { "id": "f-wrd-2", "text": "foot",   "expected": ["F","UH","T"],         "position": "initial" },
+          { "id": "f-wrd-3", "text": "leaf",   "expected": ["L","IY","F"],         "position": "final"   },
+          { "id": "f-wrd-4", "text": "coffee", "expected": ["K","AA","F","IY"],    "position": "medial" }
+        ],
+        "sentence": [
+          { "id": "f-sen-1", "text": "I see a fish.",       "expected": ["AY","S","IY","AH","F","IH","SH"] },
+          { "id": "f-sen-2", "text": "My foot hurts.",      "expected": ["M","AY","F","UH","T","HH","ER","T","S"] }
+        ]
+      }
+    },
+    {
+      "id": "l",
+      "phoneme": "L",
+      "levels": {
+        "sound": [
+          { "id": "l-snd-1", "text": "L", "expected": ["L"], "reps": 5, "prompt": "Tongue tip up against the ridge behind your top teeth. Voice on." }
+        ],
+        "word": [
+          { "id": "l-wrd-1", "text": "lion",   "expected": ["L","AY","AH","N"],    "position": "initial" },
+          { "id": "l-wrd-2", "text": "leaf",   "expected": ["L","IY","F"],         "position": "initial" },
+          { "id": "l-wrd-3", "text": "ball",   "expected": ["B","AO","L"],         "position": "final"   },
+          { "id": "l-wrd-4", "text": "balloon","expected": ["B","AH","L","UW","N"], "position": "medial" }
+        ],
+        "sentence": [
+          { "id": "l-sen-1", "text": "The lion roars.",     "expected": ["DH","AH","L","AY","AH","N","R","AO","R","Z"] },
+          { "id": "l-sen-2", "text": "Throw the ball.",     "expected": ["TH","R","OW","DH","AH","B","AO","L"] }
+        ]
+      }
     }
   ]
 }

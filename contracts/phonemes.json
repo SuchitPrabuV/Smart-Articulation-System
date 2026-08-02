@@ -11,6 +11,7 @@
     "DH": { "ipa": "/ð/",  "label": "TH", "viseme": "viseme_TH", "place": "dental",       "cue": "Tongue between your teeth like TH, with your voice switched on." },
     "R":  { "ipa": "/ɹ/",  "label": "R",  "viseme": "viseme_RR", "place": "alveolar",     "cue": "Curl or bunch your tongue. It must not touch the roof of your mouth." },
     "L":  { "ipa": "/l/",  "label": "L",  "viseme": "viseme_nn", "place": "alveolar",     "cue": "Tongue tip presses the ridge behind your top teeth. Air escapes at the sides." },
+    "M":  { "ipa": "/m/",  "label": "M",  "viseme": "viseme_PP", "place": "bilabial",     "cue": "Lips pressed together. Hum with your voice on. The air goes through your nose." },
     "K":  { "ipa": "/k/",  "label": "K",  "viseme": "viseme_kk", "place": "velar",        "cue": "Back of the tongue lifts to the soft palate, then pops apart." },
     "G":  { "ipa": "/g/",  "label": "G",  "viseme": "viseme_kk", "place": "velar",        "cue": "Same as K, with your voice on. Feel the buzz at the back." },
     "F":  { "ipa": "/f/",  "label": "F",  "viseme": "viseme_FF", "place": "labiodental",  "cue": "Top teeth rest on your bottom lip. Blow air through the gap." },

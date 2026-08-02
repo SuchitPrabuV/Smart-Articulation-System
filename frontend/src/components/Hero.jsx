@@ -1,14 +1,13 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-export default function Hero() {
+export default function Hero({ onStart }) {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  function handleStart() {
-    login();
-    navigate('/app');
-  }
+  // Use the parent's handler (which shows the mascot) when provided; otherwise
+  // fall back to the direct login + navigate.
+  const handleStart = onStart || (() => { login(); navigate('/app'); });
 
   return (
     <section

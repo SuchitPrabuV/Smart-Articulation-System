@@ -61,3 +61,32 @@ export async function scoreAttempt(audioBlob, meta) {
   }
   return res.json();
 }
+
+export async function fetchProgress(userId) {
+  if (USE_MOCK) return { attempts: [], totalPracticeSeconds: 0 };
+  const res = await fetch(`${BASE}/api/progress/${encodeURIComponent(userId)}`);
+  if (!res.ok) throw new Error('fetchProgress failed');
+  return res.json();
+}
+
+export async function saveAttempt(userId, attempt) {
+  if (USE_MOCK) return;
+  const res = await fetch(`${BASE}/api/progress/${encodeURIComponent(userId)}/attempt`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(attempt),
+  });
+  if (!res.ok) throw new Error('saveAttempt failed');
+  return res.json();
+}
+
+export async function savePracticeTime(userId, seconds) {
+  if (USE_MOCK) return;
+  const res = await fetch(`${BASE}/api/progress/${encodeURIComponent(userId)}/time`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ seconds }),
+  });
+  if (!res.ok) throw new Error('savePracticeTime failed');
+  return res.json();
+}

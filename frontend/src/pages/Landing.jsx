@@ -1,26 +1,31 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import FeatureCard from '../components/FeatureCard';
+import Mascot from '../components/Mascot';
 
 export default function Landing() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [showMascot, setShowMascot] = useState(false);
 
+  // Log in (mock), greet with the mascot, then head into the app.
   function handleStart() {
     login();
-    navigate('/app');
+    setShowMascot(true);
   }
 
   return (
     <div style={{ background: 'white' }}>
       <Navbar />
-      <Hero />
+      <Hero onStart={handleStart} />
       <FeatureCard />
       <HowItWorks />
       <Benefits />
       <CTASection onStart={handleStart} />
+      {showMascot && <Mascot onDone={() => navigate('/app')} />}
     </div>
   );
 }

@@ -3,7 +3,9 @@ import time
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
+import database
 from scoring import stub
 from scoring.expected import expected_phonemes, VALID_PHONEMES
 
@@ -15,6 +17,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Initialize database
+database.init_db()
 
 # --- Engine selection -------------------------------------------------------
 # The stub is the default and the permanent demo safety net. The real engine
@@ -111,3 +116,30 @@ async def score_file(
     """Backup path for the demo if the laptop microphone fails: same scoring,
     fed by an uploaded WAV instead of a live MediaRecorder blob."""
     return await score(audio, target_phoneme, target_text, level)
+
+# --- Progress tracking endpoints ---------------------------------------------
+
+class AttemptModel(BaseModel):
+    targetId: str
+    level: str
+    itemId: str
+    score: int
+    at: int
+
+class PracticeTimeModel(BaseModel):
+    seconds: int
+
+@app.get("/api/progress/{user_id}")
+def get_user_progress(user_id: str):
+    return database.get_progress(user_id)
+
+@app.post("/api/progress/{user_id}/attempt")
+def save_user_attempt(user_id: str, attempt: AttemptModel):
+    database.save_attempt(user_id, attempt.dict())
+    return {"status": "ok"}
+
+@app.post("/api/progress/{user_id}/time")
+def add_user_practice_time(user_id: str, data: PracticeTimeModel):
+    database.add_practice_time(user_id, data.seconds)
+    return {"status": "ok"}
+

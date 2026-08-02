@@ -63,6 +63,33 @@ const ITEM_IMAGES = {
   'g-wrd-4': '🛒', // wagon
   'g-sen-1': '🐐', // The goat is big.
   'g-sen-2': '👧', // The girl has a dog.
+
+  // ── M ──────────────────────────────────────────────
+  'm-snd-1': '👄', // M — hum
+  'm-wrd-1': '🐭', // mouse
+  'm-wrd-2': '🌙', // moon
+  'm-wrd-3': '👩', // mom
+  'm-wrd-4': '🐫', // camel
+  'm-sen-1': '🐭', // The mouse is small.
+  'm-sen-2': '🌙', // Look at the moon.
+
+  // ── F ──────────────────────────────────────────────
+  'f-snd-1': '🌬️', // F — blow air
+  'f-wrd-1': '🐟', // fish
+  'f-wrd-2': '🦶', // foot
+  'f-wrd-3': '🍃', // leaf
+  'f-wrd-4': '☕', // coffee
+  'f-sen-1': '🐟', // I see a fish.
+  'f-sen-2': '🦶', // My foot hurts.
+
+  // ── L ──────────────────────────────────────────────
+  'l-snd-1': '👅', // L — tongue up
+  'l-wrd-1': '🦁', // lion
+  'l-wrd-2': '🍃', // leaf
+  'l-wrd-3': '🏀', // ball
+  'l-wrd-4': '🎈', // balloon
+  'l-sen-1': '🦁', // The lion roars.
+  'l-sen-2': '🏀', // Throw the ball.
 };
 
 export function imageForItem(item) {

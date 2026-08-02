@@ -10,24 +10,26 @@ import { frameAt } from '../animation/timeline';
  */
 
 // ── Tongue rig: fixed anchors + movable surface points (front → back) ──
-const FRONT_BOTTOM = { x: 96, y: 245 };
-const BACK_ROOT = { x: 224, y: 244 };
+// A thin muscle sitting up in the lips region (not a jaw-filling blob): the
+// bottom edge is kept close to the top surface so the tongue reads as slim.
+const FRONT_BOTTOM = { x: 72, y: 200 };
+const BACK_ROOT = { x: 204, y: 204 };
 
-// Neutral rest: tongue slightly up between the lips.
+// Neutral rest: thin tongue lying up between the lips.
 const REST = [
-  { x: 84, y: 192 }, // tip
-  { x: 140, y: 212 }, // blade
-  { x: 184, y: 216 }, // front
-  { x: 214, y: 212 }, // dorsum
+  { x: 64, y: 182 }, // tip — up in the gap between the lips
+  { x: 112, y: 186 }, // blade
+  { x: 156, y: 189 }, // front
+  { x: 196, y: 188 }, // dorsum
 ];
 
 // S: tip lifts toward the alveolar ridge (~116,170), leaving a narrow channel
 // for the air to hiss through — not a full closure.
 const S = [
-  { x: 124, y: 182 }, // tip
-  { x: 152, y: 198 }, // blade
-  { x: 190, y: 210 }, // front
-  { x: 220, y: 210 }, // dorsum
+  { x: 108, y: 174 }, // tip
+  { x: 150, y: 184 }, // blade
+  { x: 184, y: 188 }, // front
+  { x: 198, y: 189 }, // dorsum
 ];
 
 const isS = (arpa) => String(arpa || '').toUpperCase() === 'S';
